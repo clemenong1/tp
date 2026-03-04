@@ -262,29 +262,30 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is a university student Teaching Assistant for CS2040S managing multiple tutorial/lab groups
+* needs to track student details and mark attendance quickly during live classes
+* prefers keyboard-only workflows and can type fast
+* finds GUI-based portals/spreadsheets too slow for real-time classroom administration
+* needs to organize students by tutorial/lab session for quick lookup
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: CLI-Tacts helps CS2040S Teaching Assistants manage student contacts and attendance quickly via CLI by centralising student details and tutorial groupings locally, enabling fast administrative actions during tutorials without disrupting teaching flow.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​ | I want to …​ | So that I can…​ |
+| --- | --- | --- | --- |
+| `* * *` | CS2040S Teaching Assistant | add a student with name, student ID, email, and tutorial group | set up my tutorial groups at the start of the semester |
+| `* * *` | CS2040S Teaching Assistant | edit a student’s contact details | keep records accurate when details change |
+| `* * *` | CS2040S Teaching Assistant | delete a student by student ID | remove students who drop the module or switch classes |
+| `* * *` | CS2040S Teaching Assistant | find students by name (partial match) | locate a student quickly during class |
+| `* * *` | CS2040S Teaching Assistant | list all students | get an overview of who is under my care |
+| `* * *` | CS2040S Teaching Assistant | filter the student list by tutorial group | focus only on the current class I’m teaching |
+| `* * *` | CS2040S Teaching Assistant | mark a student as present for a specific week | track attendance quickly during live tutorials |
+| `* *` | CS2040S Teaching Assistant | view students with low attendance | identify students who may need follow-up |
+| `* *` | CS2040S Teaching Assistant | export student and attendance records to a CSV | back up data or submit attendance reports |
+| `*` | CS2040S Teaching Assistant | archive or clear a semester’s data | reset the app cleanly for a new semester |
 
 ### Use cases
 
