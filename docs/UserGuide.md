@@ -34,7 +34,7 @@ The primary users are **CS2040S Teaching Assistants** who:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe i/A0123456X e/johnd@u.nus.edu p/98765432 th/@johndoe t/T01` : Adds student `John Doe` to CLI-Tacts.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
