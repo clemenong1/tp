@@ -44,6 +44,10 @@ public class TeleHandleTest {
         // same values -> returns true
         assertTrue(teleHandle.equals(new TeleHandle("@abcde")));
 
+        // same values (different case) -> returns true (case-insensitive)
+        assertTrue(teleHandle.equals(new TeleHandle("@AbCdE")));
+        assertTrue(teleHandle.equals(new TeleHandle("@ABCDE")));
+
         // same object -> returns true
         assertTrue(teleHandle.equals(teleHandle));
 
@@ -62,12 +66,20 @@ public class TeleHandleTest {
         TeleHandle teleHandle1 = new TeleHandle("@abcde");
         TeleHandle teleHandle2 = new TeleHandle("@abcde");
         assertEquals(teleHandle1.hashCode(), teleHandle2.hashCode());
+
+        // case-insensitive: same hash code for different casing
+        TeleHandle teleHandle3 = new TeleHandle("@AbCdE");
+        assertEquals(teleHandle1.hashCode(), teleHandle3.hashCode());
     }
 
     @Test
-    public void toString_returnsValue() {
+    public void toString_returnsNormalizedValue() {
         TeleHandle teleHandle = new TeleHandle("@abcde");
         assertEquals("@abcde", teleHandle.toString());
+
+        // value is normalized to lowercase
+        TeleHandle teleHandleUpper = new TeleHandle("@John_Doe");
+        assertEquals("@john_doe", teleHandleUpper.toString());
     }
 }
 

@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's Telegram handle in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTeleHandle(String)}.
+ * Case-insensitive: stored values are normalized to lowercase.
  */
 public class TeleHandle {
 
@@ -19,13 +20,14 @@ public class TeleHandle {
 
     /**
      * Constructs a {@code TeleHandle}.
+     * Value is normalized to lowercase for case-insensitive handling.
      *
      * @param teleHandle A valid Telegram handle.
      */
     public TeleHandle(String teleHandle) {
         requireNonNull(teleHandle);
         checkArgument(isValidTeleHandle(teleHandle), MESSAGE_CONSTRAINTS);
-        value = teleHandle;
+        value = teleHandle.toLowerCase();
     }
 
     public static boolean isValidTeleHandle(String test) {
@@ -46,12 +48,12 @@ public class TeleHandle {
             return false;
         }
         TeleHandle otherTeleHandle = (TeleHandle) other;
-        return value.equals(otherTeleHandle.value);
+        return value.equalsIgnoreCase(otherTeleHandle.value);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return value.toLowerCase().hashCode();
     }
 }
 
