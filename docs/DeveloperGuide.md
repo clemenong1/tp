@@ -336,7 +336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: Mark student attendanc**
+**Use case: Mark student attendance**
 
 **MSS**
 

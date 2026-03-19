@@ -124,24 +124,49 @@ Examples:
 *  `edit 1 p/91234567 e/alice_new@u.nus.edu` Edits the phone number and email address of the 1st student.
 *  `edit 2 t/T03` Moves the 2nd student to tutorial group `T03`.
 
-### Locating persons by name or tutorial group: `find`
+### Locating students by name and/or tutorial group: `find`
 
-Finds persons whose names contain any of the given keywords and/or belong to the specified
-tutorial group(s).
+Allows a TA to **filter the student list** to find specific individuals based on their names and/or tutorial group. This is useful when the matric number (student ID) is not immediately known.
 
-Format: `find [n/NAME_KEYWORD [MORE_KEYWORDS]...] [t/TUTORIAL_GROUP]...`
+Formats:
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the **name** is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* `find n/NAME_KEYWORD`
+* `find t/TUTORIAL_GROUP`
+* `find n/NAME_KEYWORD t/TUTORIAL_GROUP`
+
+At least one of `n/` or `t/` must be present.
+
+#### Name (`n/`) filter
+
+* **Characters**: the search term should only contain alphanumeric characters, spaces, hyphens (`-`), commas (`,`), and apostrophes (`'`).
+* **Case sensitivity**: case-insensitive. `find n/ALEX` is the same as `find n/alex`.
+* **Spacing**: leading and trailing spaces are ignored. Multiple internal spaces are treated as one.
+
+If an invalid name keyword is supplied, CLI-Tacts shows an error similar to:
+
+> Invalid name! Search terms should only contain alphanumeric characters, spaces, hyphens (-), commas (,), and apostrophes (') only.
+
+#### Tutorial group (`t/`) filter
+
+* **Format**: must start with `T` followed by exactly 2 digits, e.g. `T01`, `T12`.  
+  (This is the same format used when adding or editing a student.)
+* **Case sensitivity**: case-sensitive. `t12` is different from `T12`.
+
+If an invalid tutorial group is supplied, CLI-Tacts shows an error similar to:
+
+> Invalid tutorial group. Format should be T followed by two digits (e.g., T01).
+
+#### Combined filters
+
+* When both `n/` and `t/` are present, CLI-Tacts returns students who **match the name filter AND belong to the specified tutorial group**.
+* On success, the status bar shows e.g. `5 persons listed!` and the list shows only matching students.
+* If no students match, the list becomes empty and the status shows `0 persons listed!`.
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find t/T01` returns all students in tutorial group T01
-* `find n/alex t/T01` returns students named Alex in tutorial group T01
+* `find n/John` — finds all students with “John” in their name.
+* `find t/T01` — finds all students from tutorial group `T01`.
+* `find n/Tan` — finds all students with “Tan” in their name (surname or given name).
+* `find n/john t/T01` — finds all students with “John” in their name **and** from tutorial group `T01`.
 
 ### Deleting a person : `delete`
 
@@ -210,6 +235,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [i/STUDENT_ID] [e/EMAIL] [p/PHONE_NUMBER] [th/TELE_HANDLE] [t/TUTORIAL_GROUP]`<br> e.g.,`edit 2 n/James Lee t/T03`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find n/NAME_KEYWORD [t/TUTORIAL_GROUP]`<br> e.g., `find n/James t/T01`
 **List** | `list`
 **Help** | `help`
