@@ -1,9 +1,13 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -25,6 +29,7 @@ class JsonAdaptedPerson {
     private final String teleHandle;
     private final String studentId;
     private final String tutorialGroup;
+    private final List<Boolean> attendance = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -33,13 +38,17 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
             @JsonProperty("email") String email, @JsonProperty("phone") String phone,
             @JsonProperty("teleHandle") String teleHandle,
-            @JsonProperty("tutorialGroup") String tutorialGroup) {
+            @JsonProperty("tutorialGroup") String tutorialGroup,
+            @JsonProperty("attendance") List<Boolean> attendance) {
         this.name = name;
         this.studentId = studentId;
         this.email = email;
         this.phone = phone;
         this.teleHandle = teleHandle;
         this.tutorialGroup = tutorialGroup;
+        if (attendance != null) {
+            this.attendance.addAll(attendance);
+        }
     }
 
     /**
@@ -52,6 +61,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         teleHandle = source.getTeleHandle().value;
         tutorialGroup = source.getTutorialGroup().value;
+        boolean[] attendanceRecord = source.getAttendance().getAttendanceRecord();
+        for (boolean isAttended : attendanceRecord) {
+            attendance.add(isAttended);
+        }
     }
 
     /**
@@ -111,7 +124,25 @@ class JsonAdaptedPerson {
         }
         final TutorialGroup modelTutorialGroup = new TutorialGroup(tutorialGroup);
 
-        return new Person(modelName, modelPhone, modelEmail, modelTeleHandle, modelStudentId, modelTutorialGroup);
+
+        // Reconstruct attendance from the stored list
+        Attendance modelAttendance = new Attendance();
+        if (!attendance.isEmpty()) {
+            for (int i = 0; i < attendance.size() && i < Attendance.MAX_WEEKS; i++) {
+                if (attendance.get(i)) {
+                    modelAttendance.markWeek(i + 1);
+                }
+            }
+        }
+
+        return new Person(
+            modelName,
+            modelPhone,
+            modelEmail,
+            modelTeleHandle,
+            modelStudentId,
+            modelTutorialGroup,
+            modelAttendance);
     }
 
 }

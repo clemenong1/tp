@@ -20,7 +20,9 @@ public class Person {
     private final StudentId studentId;
 
     // Data fields
+    private final Attendance attendance;
     private final TutorialGroup tutorialGroup;
+
 
     /**
      * Every field must be present and not null.
@@ -33,6 +35,35 @@ public class Person {
         this.email = email;
         this.teleHandle = teleHandle;
         this.studentId = studentId;
+        this.tutorialGroup = tutorialGroup;
+        this.attendance = new Attendance();
+    }
+
+    /**
+     * Creates a Person with the specified attendance record.
+     * Every field must be present and not null.
+     * @param name the person's name
+     * @param phone the person's phone number
+     * @param email the person's email
+     * @param teleHandle the person's telegram handle
+     * @param studentId the person's student ID
+     * @param tags the person's tags
+     * @param attendance the person's attendance record
+     */
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        TeleHandle teleHandle,
+        StudentId studentId,
+        TutorialGroup tutorialGroup, Attendance attendance) {
+        requireAllNonNull(name, phone, email, teleHandle, studentId, tutorialGroup, attendance);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.teleHandle = teleHandle;
+        this.studentId = studentId;
+        this.attendance = attendance;
         this.tutorialGroup = tutorialGroup;
     }
 
@@ -54,6 +85,10 @@ public class Person {
 
     public StudentId getStudentId() {
         return studentId;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
     }
 
     public TutorialGroup getTutorialGroup() {
@@ -89,6 +124,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && teleHandle.equals(otherPerson.teleHandle)
                 && studentId.equals(otherPerson.studentId)
+                && attendance.equals(otherPerson.attendance)
                 && tutorialGroup.equals(otherPerson.tutorialGroup);
     }
 
@@ -106,6 +142,7 @@ public class Person {
                 .add("phone", phone)
                 .add("teleHandle", teleHandle)
                 .add("tutorialGroup", tutorialGroup)
+                .add("attendance", attendance)
                 .toString();
     }
 
