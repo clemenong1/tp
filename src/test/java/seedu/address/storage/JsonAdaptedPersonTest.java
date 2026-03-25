@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -27,7 +28,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_TELE_HANDLE = BENSON.getTeleHandle().toString();
+    private static final String VALID_TELE_HANDLE = BENSON.getTeleHandle().orElseThrow().toString();
     private static final String VALID_STUDENT_ID = BENSON.getStudentId().toString();
     private static final String VALID_TUTORIAL_GROUP = BENSON.getTutorialGroup().toString();
     private static final List<Boolean> VALID_ATTENDANCE = List.of(
@@ -111,11 +112,18 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullTeleHandle_throwsIllegalValueException() {
+    public void toModelType_nullTeleHandle_returnsPersonWithNullTeleHandle() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_STUDENT_ID, VALID_EMAIL, VALID_PHONE, null,
                 VALID_TUTORIAL_GROUP, VALID_ATTENDANCE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, TeleHandle.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        seedu.address.model.person.Person modelPerson = person.toModelType();
+        assertEquals(VALID_NAME, modelPerson.getName().fullName);
+        assertEquals(VALID_STUDENT_ID, modelPerson.getStudentId().value);
+        assertEquals(VALID_EMAIL, modelPerson.getEmail().value);
+        assertEquals(VALID_PHONE, modelPerson.getPhone().value);
+        assertEquals(VALID_TUTORIAL_GROUP, modelPerson.getTutorialGroup().value);
+        assertEquals(VALID_ATTENDANCE.get(0), modelPerson.getAttendance().isMarked(1));
+        assertEquals(VALID_ATTENDANCE.get(1), modelPerson.getAttendance().isMarked(2));
+        assertFalse(modelPerson.getTeleHandle().isPresent());
     }
 
     @Test

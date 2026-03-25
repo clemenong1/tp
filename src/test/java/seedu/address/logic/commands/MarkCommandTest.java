@@ -157,7 +157,7 @@ public class MarkCommandTest {
                 person.getName(),
                 person.getPhone(),
                 person.getEmail(),
-                person.getTeleHandle(),
+                person.getTeleHandle().orElse(null),
                 person.getStudentId(),
                 person.getTutorialGroup(),
                 updatedAttendance

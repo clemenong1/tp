@@ -59,7 +59,7 @@ class JsonAdaptedPerson {
         studentId = source.getStudentId().value;
         email = source.getEmail().value;
         phone = source.getPhone().value;
-        teleHandle = source.getTeleHandle().value;
+        teleHandle = source.getTeleHandle().map(th -> th.value).orElse(null);
         tutorialGroup = source.getTutorialGroup().value;
         boolean[] attendanceRecord = source.getAttendance().getAttendanceRecord();
         for (boolean isAttended : attendanceRecord) {
@@ -106,14 +106,15 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        final TeleHandle modelTeleHandle;
         if (teleHandle == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TeleHandle.class.getSimpleName()));
+            modelTeleHandle = null;
+        } else {
+            if (!TeleHandle.isValidTeleHandle(teleHandle)) {
+                throw new IllegalValueException(TeleHandle.MESSAGE_CONSTRAINTS);
+            }
+            modelTeleHandle = new TeleHandle(teleHandle);
         }
-        if (!TeleHandle.isValidTeleHandle(teleHandle)) {
-            throw new IllegalValueException(TeleHandle.MESSAGE_CONSTRAINTS);
-        }
-        final TeleHandle modelTeleHandle = new TeleHandle(teleHandle);
 
         if (tutorialGroup == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

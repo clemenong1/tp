@@ -55,7 +55,15 @@ public class PersonCard extends UiPart<Region> {
         studentId.setText(person.getStudentId().value);
         email.setText(person.getEmail().value);
         phone.setText(person.getPhone().value);
-        teleHandle.setText(person.getTeleHandle().value);
+        person.getTeleHandle().ifPresentOrElse(th -> {
+            teleHandle.setText(th.value);
+            teleHandle.setManaged(true);
+            teleHandle.setVisible(true);
+        }, () -> {
+            teleHandle.setText("");
+            teleHandle.setManaged(false);
+            teleHandle.setVisible(false);
+        });
         tutorialGroup.setText(person.getTutorialGroup().value);
         attendanceTableManager = new AttendanceTable(attendanceTable, person.getAttendance());
     }

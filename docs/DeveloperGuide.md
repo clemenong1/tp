@@ -275,7 +275,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​ | I want to …​ | So that I can…​ |
 | --- | --- | --- | --- |
-| `* * *` | CS2040S Teaching Assistant | add a student with name, student ID, email, and tutorial group | set up my tutorial groups at the start of the semester |
+| `* * *` | CS2040S Teaching Assistant | add a student with name, student ID, email, tutorial group, and optional Telegram handle | set up my tutorial groups at the start of the semester |
 | `* * *` | CS2040S Teaching Assistant | edit a student’s contact details | keep records accurate when details change |
 | `* * *` | CS2040S Teaching Assistant | delete a student by student ID | remove students who drop the module or switch classes |
 | `* * *` | CS2040S Teaching Assistant | find students by name (partial match) | locate a student quickly during class |

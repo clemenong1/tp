@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -25,11 +26,11 @@ public class Person {
 
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null, except {@code teleHandle} which is optional.
      */
     public Person(Name name, Phone phone, Email email, TeleHandle teleHandle, StudentId studentId,
                   TutorialGroup tutorialGroup) {
-        requireAllNonNull(name, phone, email, teleHandle, studentId, tutorialGroup);
+        requireAllNonNull(name, phone, email, studentId, tutorialGroup);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,7 +58,7 @@ public class Person {
         TeleHandle teleHandle,
         StudentId studentId,
         TutorialGroup tutorialGroup, Attendance attendance) {
-        requireAllNonNull(name, phone, email, teleHandle, studentId, tutorialGroup, attendance);
+        requireAllNonNull(name, phone, email, studentId, tutorialGroup, attendance);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -79,8 +80,8 @@ public class Person {
         return email;
     }
 
-    public TeleHandle getTeleHandle() {
-        return teleHandle;
+    public Optional<TeleHandle> getTeleHandle() {
+        return Optional.ofNullable(teleHandle);
     }
 
     public StudentId getStudentId() {
@@ -122,7 +123,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && teleHandle.equals(otherPerson.teleHandle)
+                && Objects.equals(teleHandle, otherPerson.teleHandle)
                 && studentId.equals(otherPerson.studentId)
                 && attendance.equals(otherPerson.attendance)
                 && tutorialGroup.equals(otherPerson.tutorialGroup);
