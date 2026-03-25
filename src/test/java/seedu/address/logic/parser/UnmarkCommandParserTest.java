@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.getErrorMessageForDuplicatePrefixes;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -27,6 +28,24 @@ public class UnmarkCommandParserTest {
     public void parse_validGroupArgs_returnsUnmarkCommand() {
         assertParseSuccess(parser, " " + PREFIX_TUTORIAL_GROUP + "T01 " + PREFIX_WEEK + "3",
                 new UnmarkCommand(new TutorialGroup("T01"), 3));
+    }
+
+    @Test
+    public void parse_validTutorialGroupNoLeadingSpace_returnsUnmarkCommand() {
+        assertParseSuccess(parser, PREFIX_TUTORIAL_GROUP + "T02 " + PREFIX_WEEK + "1",
+                new UnmarkCommand(new TutorialGroup("T02"), 1));
+    }
+
+    @Test
+    public void parse_duplicateWeek_throwsParseException() {
+        assertParseFailure(parser, PREFIX_TUTORIAL_GROUP + "T01 " + PREFIX_WEEK + "1 " + PREFIX_WEEK + "2",
+                getErrorMessageForDuplicatePrefixes(PREFIX_WEEK));
+    }
+
+    @Test
+    public void parse_duplicateTutorialGroup_throwsParseException() {
+        assertParseFailure(parser, PREFIX_TUTORIAL_GROUP + "T01 " + PREFIX_TUTORIAL_GROUP + "T02 " + PREFIX_WEEK + "1",
+                getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_GROUP));
     }
 
     @Test
