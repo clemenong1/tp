@@ -35,8 +35,8 @@ public class MarkCommand extends Command {
             + "Example (group): " + COMMAND_WORD + " " + PREFIX_TUTORIAL_GROUP + "T02 " + PREFIX_WEEK + "2";
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person: %1$s";
-    public static final String MESSAGE_ALREADY_MARKED = "This person has already been marked"
-                                + " as attended for this week.";
+    public static final String MESSAGE_ALREADY_MARKED = "%1$s has already been marked"
+                                + " as attended for week %2$s.";
     public static final String MESSAGE_MARK_GROUP_SUCCESS =
             "Marked week %1$d for tutorial group %2$s: %3$d student(s) updated, %4$d already recorded for this week.";
     public static final String MESSAGE_NO_STUDENTS_IN_GROUP = "No students found in tutorial group %1$s.";
@@ -94,7 +94,7 @@ public class MarkCommand extends Command {
         Person personToMark = lastShownList.get(index.getZeroBased());
 
         if (personToMark.getAttendance().isMarked(week)) {
-            throw new CommandException(MESSAGE_ALREADY_MARKED);
+            throw new CommandException(String.format(MESSAGE_ALREADY_MARKED, personToMark.getName(), week));
         }
 
         Attendance updatedAttendance = personToMark.getAttendance().createCopyWithMarkedWeek(week);

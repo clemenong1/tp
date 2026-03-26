@@ -84,8 +84,11 @@ public class MarkCommandTest {
         }
 
         // Try to mark the same week again
+        Person markedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String expectedMessage = String.format(MarkCommand.MESSAGE_ALREADY_MARKED,
+                markedPerson.getName(), weekToMark);
         MarkCommand secondMarkCommand = new MarkCommand(INDEX_FIRST_PERSON, weekToMark);
-        assertCommandFailure(secondMarkCommand, model, MarkCommand.MESSAGE_ALREADY_MARKED);
+        assertCommandFailure(secondMarkCommand, model, expectedMessage);
     }
 
     @Test
