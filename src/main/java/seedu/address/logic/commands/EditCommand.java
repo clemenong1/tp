@@ -98,7 +98,8 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        TeleHandle updatedTeleHandle = editPersonDescriptor.getTeleHandle().orElse(personToEdit.getTeleHandle());
+        TeleHandle updatedTeleHandle = editPersonDescriptor.getTeleHandle()
+                .orElse(personToEdit.getTeleHandle().orElse(null));
         StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         TutorialGroup updatedTutorialGroup = editPersonDescriptor.getTutorialGroup()
                 .orElse(personToEdit.getTutorialGroup());

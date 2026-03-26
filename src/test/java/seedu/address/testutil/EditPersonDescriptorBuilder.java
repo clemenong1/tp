@@ -33,7 +33,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setStudentId(person.getStudentId());
         descriptor.setEmail(person.getEmail());
         descriptor.setPhone(person.getPhone());
-        descriptor.setTeleHandle(person.getTeleHandle());
+        person.getTeleHandle().ifPresent(descriptor::setTeleHandle);
         descriptor.setTutorialGroup(person.getTutorialGroup());
     }
 

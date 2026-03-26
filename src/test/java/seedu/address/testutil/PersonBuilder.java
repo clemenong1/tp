@@ -50,7 +50,7 @@ public class PersonBuilder {
         studentId = personToCopy.getStudentId();
         email = personToCopy.getEmail();
         phone = personToCopy.getPhone();
-        teleHandle = personToCopy.getTeleHandle();
+        teleHandle = personToCopy.getTeleHandle().orElse(null);
         tutorialGroup = personToCopy.getTutorialGroup();
         attendance = personToCopy.getAttendance();
     }
@@ -75,7 +75,7 @@ public class PersonBuilder {
      * Sets the {@code TeleHandle} of the {@code Person} that we are building.
      */
     public PersonBuilder withTeleHandle(String teleHandle) {
-        this.teleHandle = new TeleHandle(teleHandle);
+        this.teleHandle = (teleHandle == null) ? null : new TeleHandle(teleHandle);
         return this;
     }
 

@@ -42,10 +42,9 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Telegram: ")
-                .append(person.getTeleHandle())
-                .append("; Tutorial Group: ")
+                .append(person.getPhone());
+        person.getTeleHandle().ifPresent(th -> builder.append("; Telegram: ").append(th));
+        builder.append("; Tutorial Group: ")
                 .append(person.getTutorialGroup());
         return builder.toString();
     }

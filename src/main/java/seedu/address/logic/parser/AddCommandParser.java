@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_TELE_HANDLE, PREFIX_TUTORIAL_GROUP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_EMAIL, PREFIX_PHONE,
-                PREFIX_TELE_HANDLE, PREFIX_TUTORIAL_GROUP)
+                PREFIX_TUTORIAL_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -47,7 +47,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        TeleHandle teleHandle = ParserUtil.parseTeleHandle(argMultimap.getValue(PREFIX_TELE_HANDLE).get());
+        TeleHandle teleHandle = null;
+        if (argMultimap.getValue(PREFIX_TELE_HANDLE).isPresent()) {
+            teleHandle = ParserUtil.parseTeleHandle(argMultimap.getValue(PREFIX_TELE_HANDLE).get());
+        }
         TutorialGroup tutorialGroup = ParserUtil.parseTutorialGroup(
                 argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
 

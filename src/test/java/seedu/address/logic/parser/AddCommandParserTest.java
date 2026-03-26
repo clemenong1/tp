@@ -62,6 +62,11 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + STUDENT_ID_DESC_BOB + EMAIL_DESC_BOB
                 + PHONE_DESC_BOB + TELE_HANDLE_DESC_BOB + TUTORIAL_GROUP_DESC_BOB, new AddCommand(expectedPerson));
 
+        // teleHandle optional
+        Person expectedPersonWithoutTeleHandle = new PersonBuilder(BOB).withTeleHandle(null).build();
+        assertParseSuccess(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB
+                + TUTORIAL_GROUP_DESC_BOB, new AddCommand(expectedPersonWithoutTeleHandle));
+
         // different tutorial group
         Person expectedPersonDiffTg = new PersonBuilder(BOB).withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).build();
         assertParseSuccess(parser,
@@ -167,10 +172,6 @@ public class AddCommandParserTest {
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + VALID_EMAIL_BOB + PHONE_DESC_BOB
                 + TELE_HANDLE_DESC_BOB + TUTORIAL_GROUP_DESC_BOB, expectedMessage);
-
-        // missing teleHandle prefix
-        assertParseFailure(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB
-                + VALID_TELE_HANDLE_BOB + TUTORIAL_GROUP_DESC_BOB, expectedMessage);
 
         // missing studentId prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_STUDENT_ID_BOB + EMAIL_DESC_BOB + PHONE_DESC_BOB

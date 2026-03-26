@@ -102,7 +102,7 @@ public class MarkCommand extends Command {
                 personToMark.getName(),
                 personToMark.getPhone(),
                 personToMark.getEmail(),
-                personToMark.getTeleHandle(),
+                personToMark.getTeleHandle().orElse(null),
                 personToMark.getStudentId(),
                 personToMark.getTutorialGroup(),
                 updatedAttendance
@@ -136,7 +136,7 @@ public class MarkCommand extends Command {
                     person.getName(),
                     person.getPhone(),
                     person.getEmail(),
-                    person.getTeleHandle(),
+                    person.getTeleHandle().orElse(null),
                     person.getStudentId(),
                     person.getTutorialGroup(),
                     updatedAttendance

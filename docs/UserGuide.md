@@ -81,11 +81,11 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a student to CLI-Tacts with all fields required for CS2040S administration.
+Adds a student to CLI-Tacts. Telegram handle is optional (useful for contacting students quickly, but not required).
 
 Format:
 
-`add n/NAME i/STUDENT_ID e/EMAIL p/PHONE_NUMBER th/TELE_HANDLE t/TUTORIAL_GROUP`
+`add n/NAME i/STUDENT_ID e/EMAIL p/PHONE_NUMBER [th/TELE_HANDLE] t/TUTORIAL_GROUP`
 
 Where:
 
@@ -306,7 +306,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME i/STUDENT_ID e/EMAIL p/PHONE_NUMBER th/TELE_HANDLE t/TUTORIAL_GROUP` <br> e.g., `add n/James Ho i/A0123456X e/jamesho@u.nus.edu p/22224444 th/@jamesho t/T01`
+**Add** | `add n/NAME i/STUDENT_ID e/EMAIL p/PHONE_NUMBER [th/TELE_HANDLE] t/TUTORIAL_GROUP` <br> e.g., `add n/James Ho i/A0123456X e/jamesho@u.nus.edu p/22224444 th/@jamesho t/T01`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [i/STUDENT_ID] [e/EMAIL] [p/PHONE_NUMBER] [th/TELE_HANDLE] [t/TUTORIAL_GROUP]`<br> e.g.,`edit 2 n/James Lee t/T03`

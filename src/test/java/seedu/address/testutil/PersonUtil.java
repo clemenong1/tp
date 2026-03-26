@@ -32,7 +32,7 @@ public class PersonUtil {
         sb.append(PREFIX_STUDENT_ID + person.getStudentId().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_TELE_HANDLE + person.getTeleHandle().value + " ");
+        person.getTeleHandle().ifPresent(th -> sb.append(PREFIX_TELE_HANDLE).append(th.value).append(" "));
         sb.append(PREFIX_TUTORIAL_GROUP + person.getTutorialGroup().value + " ");
         return sb.toString();
     }
