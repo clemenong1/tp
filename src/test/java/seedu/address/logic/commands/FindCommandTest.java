@@ -19,9 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.NameAndTutorialGroupPredicate;
-import seedu.address.model.person.TeleHandle;
 import seedu.address.model.person.TutorialGroup;
 
 /**
@@ -105,7 +103,7 @@ public class FindCommandTest {
     public void execute_emailOnly_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameAndTutorialGroupPredicate predicate = new NameAndTutorialGroupPredicate(List.of(), List.of(),
-                List.of(new Email("alice@u.nus.edu")), List.of());
+                List.of("alice@u.nus.edu"), List.of());
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -116,7 +114,7 @@ public class FindCommandTest {
     public void execute_teleHandleOnly_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameAndTutorialGroupPredicate predicate = new NameAndTutorialGroupPredicate(List.of(), List.of(), List.of(),
-                List.of(new TeleHandle("@benson_meier")));
+                List.of("@benson_meier"));
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

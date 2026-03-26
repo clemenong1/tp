@@ -78,7 +78,7 @@ public class NameAndTutorialGroupPredicateTest {
                 .withTutorialGroup("T01").build();
         NameAndTutorialGroupPredicate predicate =
                 new NameAndTutorialGroupPredicate(List.of(), List.of(),
-                        List.of(new Email("alice@u.nus.edu")), List.of());
+                        List.of("alice@u.nus.edu"), List.of());
 
         assertTrue(predicate.test(person));
     }
@@ -89,7 +89,7 @@ public class NameAndTutorialGroupPredicateTest {
                 .withTutorialGroup("T01").build();
         NameAndTutorialGroupPredicate predicate =
                 new NameAndTutorialGroupPredicate(List.of(), List.of(), List.of(),
-                        List.of(new TeleHandle("@alice_pauline")));
+                        List.of("@alice_pauline"));
 
         assertTrue(predicate.test(person));
     }

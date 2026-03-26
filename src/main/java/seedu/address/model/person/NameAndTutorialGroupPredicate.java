@@ -13,28 +13,29 @@ import seedu.address.commons.util.ToStringBuilder;
 public class NameAndTutorialGroupPredicate implements Predicate<Person> {
     private final List<String> nameKeywords;
     private final List<TutorialGroup> tutorialGroups;
-    private final List<Email> emails;
-    private final List<TeleHandle> teleHandles;
+    private final List<String> emailPrefixes;
+    private final List<String> teleHandlePrefixes;
 
     /**
      * Constructs a predicate that matches persons by name keywords and/or tutorial groups.
      *
      * @param nameKeywords   Name keywords to match; every keyword must match (case-insensitive, word-prefix match).
      * @param tutorialGroups Tutorial groups to match (exact match).
-     * @param emails         Emails to match (exact match).
-     * @param teleHandles    Telegram handles to match (exact match).
+     * @param emailPrefixes  Email prefixes to match (case-insensitive prefix match).
+     * @param teleHandlePrefixes Telegram handle prefixes to match (case-insensitive prefix match).
      */
     public NameAndTutorialGroupPredicate(List<String> nameKeywords, List<TutorialGroup> tutorialGroups,
-                                         List<Email> emails, List<TeleHandle> teleHandles) {
+                                         List<String> emailPrefixes, List<String> teleHandlePrefixes) {
         this.nameKeywords = nameKeywords;
         this.tutorialGroups = tutorialGroups;
-        this.emails = emails;
-        this.teleHandles = teleHandles;
+        this.emailPrefixes = emailPrefixes;
+        this.teleHandlePrefixes = teleHandlePrefixes;
     }
 
     @Override
     public boolean test(Person person) {
-        if (nameKeywords.isEmpty() && tutorialGroups.isEmpty() && emails.isEmpty() && teleHandles.isEmpty()) {
+        if (nameKeywords.isEmpty() && tutorialGroups.isEmpty() && emailPrefixes.isEmpty()
+                && teleHandlePrefixes.isEmpty()) {
             return false;
         }
 
@@ -42,11 +43,11 @@ public class NameAndTutorialGroupPredicate implements Predicate<Person> {
                 .allMatch(keyword -> StringUtil.containsWordPrefixIgnoreCase(person.getName().fullName, keyword));
         boolean matchesTutorialGroup = tutorialGroups.isEmpty() || tutorialGroups.stream()
                 .anyMatch(group -> person.getTutorialGroup().value.equalsIgnoreCase(group.value));
-        boolean matchesEmail = emails.isEmpty() || emails.stream()
-                .anyMatch(email -> person.getEmail().value.equalsIgnoreCase(email.value));
-        boolean matchesTeleHandle = teleHandles.isEmpty() || teleHandles.stream()
-                .anyMatch(teleHandle -> person.getTeleHandle()
-                        .map(personTeleHandle -> personTeleHandle.value.equalsIgnoreCase(teleHandle.value))
+        boolean matchesEmail = emailPrefixes.isEmpty() || emailPrefixes.stream()
+                .anyMatch(prefix -> StringUtil.startsWithIgnoreCase(person.getEmail().value, prefix));
+        boolean matchesTeleHandle = teleHandlePrefixes.isEmpty() || teleHandlePrefixes.stream()
+                .anyMatch(prefix -> person.getTeleHandle()
+                        .map(th -> StringUtil.startsWithIgnoreCase(th.value, prefix))
                         .orElse(false));
 
         return matchesName && matchesTutorialGroup && matchesEmail && matchesTeleHandle;
@@ -65,8 +66,8 @@ public class NameAndTutorialGroupPredicate implements Predicate<Person> {
         NameAndTutorialGroupPredicate otherPredicate = (NameAndTutorialGroupPredicate) other;
         return nameKeywords.equals(otherPredicate.nameKeywords)
                 && tutorialGroups.equals(otherPredicate.tutorialGroups)
-                && emails.equals(otherPredicate.emails)
-                && teleHandles.equals(otherPredicate.teleHandles);
+                && emailPrefixes.equals(otherPredicate.emailPrefixes)
+                && teleHandlePrefixes.equals(otherPredicate.teleHandlePrefixes);
     }
 
     @Override
@@ -74,8 +75,8 @@ public class NameAndTutorialGroupPredicate implements Predicate<Person> {
         return new ToStringBuilder(this)
                 .add("nameKeywords", nameKeywords)
                 .add("tutorialGroups", tutorialGroups)
-                .add("emails", emails)
-                .add("teleHandles", teleHandles)
+                .add("emailPrefixes", emailPrefixes)
+                .add("teleHandlePrefixes", teleHandlePrefixes)
                 .toString();
     }
 }

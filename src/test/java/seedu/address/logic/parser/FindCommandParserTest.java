@@ -10,9 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.NameAndTutorialGroupPredicate;
-import seedu.address.model.person.TeleHandle;
 import seedu.address.model.person.TutorialGroup;
 
 public class FindCommandParserTest {
@@ -61,13 +59,13 @@ public class FindCommandParserTest {
         // email only
         FindCommand expectedFindCommandByEmail =
                 new FindCommand(new NameAndTutorialGroupPredicate(List.of(), List.of(),
-                        List.of(new Email("alice@u.nus.edu")), List.of()));
+                        List.of("alice@u.nus.edu"), List.of()));
         assertParseSuccess(parser, " e/alice@u.nus.edu ", expectedFindCommandByEmail);
 
         // telehandle only
         FindCommand expectedFindCommandByTele =
                 new FindCommand(new NameAndTutorialGroupPredicate(List.of(), List.of(),
-                        List.of(), List.of(new TeleHandle("@alice"))));
+                        List.of(), List.of("@alice")));
         assertParseSuccess(parser, " th/@alice ", expectedFindCommandByTele);
     }
 
