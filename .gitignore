@@ -3,6 +3,9 @@
 /build/
 src/main/resources/docs/
 
+# IntelliJ IDEA compiled output
+/bin/
+
 # IDEA files
 /.idea/
 /out/
