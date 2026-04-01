@@ -89,11 +89,20 @@ Format:
 
 Where:
 
+- `NAME` should only contain alphanumeric characters, spaces, hyphens (`-`), commas (`,`), and apostrophes (`'`)
 - `STUDENT_ID` must match `AxxxxxxxY` (e.g. `A0123456X`)
-- `EMAIL` must end with `@u.nus.edu`
+- `EMAIL` must be a valid NUS email ending with `@u.nus.edu` (e.g. `alice@u.nus.edu`)
 - `PHONE_NUMBER` must be exactly 8 digits
-- `TELE_HANDLE` must start with `@`
-- `TUTORIAL_GROUP` must be `T` followed by 2 digits (e.g. `T01`, `T12`)
+- `TELE_HANDLE` (optional) must be a valid Telegram handle that starts with `@`
+- `TUTORIAL_GROUP` must start with `T` followed by exactly 2 digits (e.g. `T01`, `T12`)
+- `TUTORIAL_GROUP` is case-sensitive (`T01` is valid, `t01` is invalid)
+
+Notes for `add` arguments:
+
+- `NAME` matching/validation is case-insensitive for command behavior that uses name input (e.g. `find n/`)
+- `EMAIL` matching/validation is case-insensitive for the local-part and domain (same behavior as `find e/`)
+- `TELE_HANDLE` matching/validation is case-insensitive and handles are stored in lowercase (same behavior as `find th/`)
+- `TUTORIAL_GROUP` uses the same strict format as `find t/`
 
 Examples:
 
@@ -144,9 +153,7 @@ At least one of `n/`, `t/`, `e/`, or `th/` must be present.
 
 #### Name (`n/`) filter
 
-* **Characters**: the search term should only contain alphanumeric characters, spaces, hyphens (`-`), commas (`,`), and apostrophes (`'`).
-* **Case sensitivity**: case-insensitive. `find n/ALEX` is the same as `find n/alex`.
-* **Spacing**: leading and trailing spaces are ignored. Multiple internal spaces are treated as one.
+* **Input restrictions**: same character and case-sensitivity rules as `NAME` in `add`.
 * **Prefix matching**: each word you provide after `n/` is treated as a **prefix**. A student matches if their name contains a word that starts with that prefix (case-insensitive). For example, `find n/j` matches students with a name word starting with `j` (e.g. **John Doe**, **Mary Jane**).
 * **Multiple words**: if you enter more than one word after `n/` (separated by spaces), **every prefix must match** somewhere in the student's name (logical AND). For example, `find n/John Do` matches **John Doe** but not **John Ong**.
 
@@ -154,25 +161,41 @@ If an invalid name keyword is supplied, CLI-Tacts shows an error similar to:
 
 > Invalid name! Search terms should only contain alphanumeric characters, spaces, hyphens (-), commas (,), and apostrophes (') only.
 
+Example after applying `find n/Ale`:
+
+![find by name filter](images/findAle.png)
+
 #### Tutorial group (`t/`) filter
 
-* **Format**: must start with `T` followed by exactly 2 digits, e.g. `T01`, `T12`.  
-  (This is the same format used when adding or editing a student.)
-* **Case sensitivity**: case-sensitive. `t12` is different from `T12`.
+* **Input restrictions**: same format and case-sensitivity rules as `TUTORIAL_GROUP` in `add` / `edit`.
 
 If an invalid tutorial group is supplied, CLI-Tacts shows an error similar to:
 
 > Invalid tutorial group. Format should be T followed by two digits (e.g., T01).
 
+Example after applying `find t/T02`:
+
+![find by tutorial group filter](images/findT02.png)
+
 #### Email (`e/`) filter
 
-* **Format**: must be a valid NUS email ending with `@u.nus.edu` (same rules as `add` / `edit`).
-* **Case sensitivity**: matching is case-insensitive for the local-part and domain.
+* **Input restrictions**: same format and case-sensitivity rules as `EMAIL` in `add` / `edit`.
+* **Prefix matching**: the value after `e/` is treated as a prefix match on email (case-insensitive).  
+  For example, `find e/Cha` can match `charlotte@u.nus.edu`.
+
+Example after applying `find e/Cha`:
+
+![find by email filter](images/findCha.png)
 
 #### Telegram handle (`th/`) filter
 
-* **Format**: must be a valid Telegram handle (same rules as `add` / `edit`), starting with `@`.
-* **Case sensitivity**: handles are stored in lowercase; matching is case-insensitive (e.g. `th/@ALICE` matches `@alice`).
+* **Input restrictions**: same format and case-sensitivity rules as `TELE_HANDLE` in `add` / `edit`.
+* **Prefix matching**: the value after `th/` is treated as a prefix match on Telegram handle (case-insensitive).  
+  For example, `find th/@ro` can match `@roybala`.
+
+Example after applying `find th/@ro`:
+
+![find by telegram handle filter](images/findRo.png)
 
 #### Combined filters
 
@@ -298,6 +321,8 @@ Format: `exit`
 ### Attendance Statistics Panel
 
 The **Attendance Statistics Panel** is displayed at the bottom of the main window and updates automatically whenever the student list changes (e.g. after a `mark`, `unmark`, `add`, `delete`, or `find` command).
+
+![attendance statistics panel](images/attendancePanel.png)
 
 #### What it shows
 
