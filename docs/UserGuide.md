@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-CLI-Tacts is a **desktop app for managing CS2040S tutorial groups and student information, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CLI-Tacts helps you keep up with real-time teaching better than traditional GUI-only grading portals.
+CLI-Tacts is a lightweight application to manage your CS2040S students! It is optimised for **Command Line Interface 
+usage (CLI)**, while having the **benefits of a Graphical User Interface (GUI)**. The best of both worlds, quickness of a CLI and visualisation of a GUI! For fast typers, CLI-Tacts helps you optimise your workflow better than traditional GUI-only grading portals.
 
 The primary users are **CS2040S Teaching Assistants** who:
 
@@ -25,7 +26,7 @@ The primary users are **CS2040S Teaching Assistants** who:
 
 1. Copy the file to the folder you want to use as the _home folder_ for CLI-Tacts.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clitacts.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar CLI-tacts.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -35,6 +36,8 @@ The primary users are **CS2040S Teaching Assistants** who:
    * `list` : Lists all contacts.
 
    * `add n/John Doe i/A0123456X e/johnd@u.nus.edu p/98765432 th/@johndoe t/T01` : Adds student `John Doe` to CLI-Tacts.
+
+   * `mark 1 w/1` : Marks the first student's attedance for week 1.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -61,10 +64,10 @@ The primary users are **CS2040S Teaching Assistants** who:
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   Currently, CLI-Tacts uses a **single tutorial group** per student, so you will not see repeated `t/` prefixes.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order for `add`, `edit` and `find` commands.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `export` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -90,19 +93,17 @@ Format:
 Where:
 
 - `NAME` should only contain alphanumeric characters, spaces, hyphens (`-`), commas (`,`), and apostrophes (`'`)
-- `STUDENT_ID` must match `AxxxxxxxY` (e.g. `A0123456X`)
+- `STUDENT_ID` must start with an `a` or `A`, followed by 7 digits and end with 1 letter. (e.g. `A0123456X`).
 - `EMAIL` must be a valid NUS email ending with `@u.nus.edu` (e.g. `alice@u.nus.edu`)
 - `PHONE_NUMBER` must be exactly 8 digits
-- `TELE_HANDLE` (optional) must be a valid Telegram handle that starts with `@`
-- `TUTORIAL_GROUP` must start with `T` followed by exactly 2 digits (e.g. `T01`, `T12`)
+- `TELE_HANDLE` (optional) must be a valid Telegram handle that starts with `@` and has 5 to 32 characters.
+- `TUTORIAL_GROUP` follows a strict format that starts with `T` followed by exactly 2 digits (e.g. `T01`, `T12`)
 - `TUTORIAL_GROUP` is case-sensitive (`T01` is valid, `t01` is invalid)
 
 Notes for `add` arguments:
 
-- `NAME` matching/validation is case-insensitive for command behavior that uses name input (e.g. `find n/`)
 - `EMAIL` matching/validation is case-insensitive for the local-part and domain (same behavior as `find e/`)
 - `TELE_HANDLE` matching/validation is case-insensitive and handles are stored in lowercase (same behavior as `find th/`)
-- `TUTORIAL_GROUP` uses the same strict format as `find t/`
 
 Examples:
 
