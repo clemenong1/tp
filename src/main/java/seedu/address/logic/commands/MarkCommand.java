@@ -93,6 +93,9 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assertExactlyOneTargetSelected();
+        validateWeekOrThrow(week);
+
         if (tutorialGroup.isPresent()) {
             return executeMarkTutorialGroup(model, tutorialGroup.get(), week);
         }
@@ -107,10 +110,6 @@ public class MarkCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        if (week < 1 || week > Attendance.MAX_WEEKS) {
-            throw new CommandException(MESSAGE_INVALID_WEEK);
         }
 
         Person personToMark = lastShownList.get(index.getZeroBased());
@@ -144,10 +143,6 @@ public class MarkCommand extends Command {
             if (idx.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-        }
-
-        if (week < 1 || week > Attendance.MAX_WEEKS) {
-            throw new CommandException(MESSAGE_INVALID_WEEK);
         }
 
         int updated = 0;
@@ -221,6 +216,26 @@ public class MarkCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
                 String.format(MESSAGE_MARK_GROUP_SUCCESS, week, group.value, updated, skipped));
+    }
+
+    private void validateWeekOrThrow(int week) throws CommandException {
+        if (week < 1 || week > Attendance.MAX_WEEKS) {
+            throw new CommandException(MESSAGE_INVALID_WEEK);
+        }
+    }
+
+    private void assertExactlyOneTargetSelected() {
+        int presentCount = 0;
+        if (index.isPresent()) {
+            presentCount++;
+        }
+        if (indices.isPresent()) {
+            presentCount++;
+        }
+        if (tutorialGroup.isPresent()) {
+            presentCount++;
+        }
+        assert presentCount == 1 : "Exactly one of index, indices, or tutorialGroup must be provided.";
     }
 
     @Override

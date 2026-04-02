@@ -26,10 +26,9 @@ public class Attendance {
      * @return a new Attendance instance with the week marked
      */
     public Attendance createCopyWithMarkedWeek(int week) {
+        assertValidWeek(week);
         boolean[] newRecord = attendance.clone();
-        if (week >= 1 && week <= MAX_WEEKS) {
-            newRecord[week - 1] = true;
-        }
+        newRecord[week - 1] = true;
         return new Attendance(newRecord);
     }
 
@@ -39,10 +38,9 @@ public class Attendance {
      * @return a new Attendance instance with the week unmarked
      */
     public Attendance createCopyWithUnmarkedWeek(int week) {
+        assertValidWeek(week);
         boolean[] newRecord = attendance.clone();
-        if (week >= 1 && week <= MAX_WEEKS) {
-            newRecord[week - 1] = false;
-        }
+        newRecord[week - 1] = false;
         return new Attendance(newRecord);
     }
 
@@ -51,9 +49,8 @@ public class Attendance {
      * @param week the week number to mark (1-13)
      */
     public void markWeek(int week) {
-        if (week >= 1 && week <= MAX_WEEKS) {
-            attendance[week - 1] = true;
-        }
+        assertValidWeek(week);
+        attendance[week - 1] = true;
     }
 
     /**
@@ -61,9 +58,8 @@ public class Attendance {
      * @param week the week number to unmark (1-13)
      */
     public void unmarkWeek(int week) {
-        if (week >= 1 && week <= MAX_WEEKS) {
-            attendance[week - 1] = false;
-        }
+        assertValidWeek(week);
+        attendance[week - 1] = false;
     }
 
     /**
@@ -72,10 +68,8 @@ public class Attendance {
      * @return true if the week is marked as attended, false otherwise
      */
     public boolean isMarked(int week) {
-        if (week >= 1 && week <= MAX_WEEKS) {
-            return attendance[week - 1];
-        }
-        return false;
+        assertValidWeek(week);
+        return attendance[week - 1];
     }
 
     public boolean[] getAttendanceRecord() {
@@ -123,5 +117,9 @@ public class Attendance {
             result = 31 * result + (weekAttendance ? 1 : 0);
         }
         return result;
+    }
+
+    private void assertValidWeek(int week) {
+        assert week >= 1 && week <= MAX_WEEKS : "Week must be between 1 and " + MAX_WEEKS;
     }
 }

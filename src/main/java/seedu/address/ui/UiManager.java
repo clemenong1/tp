@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -21,9 +22,13 @@ public class UiManager implements Ui {
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ASSERTION_FAILURE_TITLE = "Assertion failure";
+    private static final String ASSERTION_FAILURE_HEADER =
+            "An internal assertion failed. The application will exit.";
 
     private Logic logic;
     private MainWindow mainWindow;
+    private final AtomicBoolean isShutdownInProgress = new AtomicBoolean(false);
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -41,6 +46,7 @@ public class UiManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
+            installAssertionFailureHandler();
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -55,7 +61,7 @@ public class UiManager implements Ui {
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
-        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
+        showAlertDialogAndWait(getPrimaryStageOrNull(), type, title, headerText, contentText);
     }
 
     /**
@@ -66,7 +72,9 @@ public class UiManager implements Ui {
                                                String contentText) {
         final Alert alert = new Alert(type);
         alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
-        alert.initOwner(owner);
+        if (owner != null) {
+            alert.initOwner(owner);
+        }
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
@@ -83,6 +91,46 @@ public class UiManager implements Ui {
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();
         System.exit(1);
+    }
+
+    private void installAssertionFailureHandler() {
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+            AssertionError assertionError = findAssertionError(throwable);
+            if (assertionError == null) {
+                return;
+            }
+
+            if (!isShutdownInProgress.compareAndSet(false, true)) {
+                return;
+            }
+
+            logger.severe("Assertion failed on thread " + thread.getName() + ": "
+                    + StringUtil.getDetails(assertionError));
+            Platform.runLater(() -> showAssertionFailureDialogAndShutdown(assertionError));
+        });
+    }
+
+    private static AssertionError findAssertionError(Throwable throwable) {
+        Throwable current = throwable;
+        while (current != null) {
+            if (current instanceof AssertionError) {
+                return (AssertionError) current;
+            }
+            current = current.getCause();
+        }
+        return null;
+    }
+
+    private void showAssertionFailureDialogAndShutdown(AssertionError assertionError) {
+        String content = assertionError.getMessage() == null ? assertionError.toString() : assertionError.getMessage();
+        showAlertDialogAndWait(getPrimaryStageOrNull(), AlertType.ERROR,
+                ASSERTION_FAILURE_TITLE, ASSERTION_FAILURE_HEADER, content);
+        Platform.exit();
+        System.exit(1);
+    }
+
+    private Stage getPrimaryStageOrNull() {
+        return mainWindow == null ? null : mainWindow.getPrimaryStage();
     }
 
 }

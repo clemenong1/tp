@@ -43,6 +43,7 @@ public class UnmarkCommand extends Command {
             "No persons found in tutorial group: %1$s.";
     public static final String MESSAGE_GROUP_ALREADY_UNMARKED =
             "All persons in tutorial group %1$s are already unmarked for week %2$d.";
+    public static final String MESSAGE_INVALID_WEEK = "Week must be a positive integer between 1 to 13.";
 
     private final Index index;
     private final TutorialGroup tutorialGroup;
@@ -77,6 +78,8 @@ public class UnmarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assertExactlyOneTargetSelected();
+        validateWeekOrThrow(week);
 
         if (tutorialGroup != null) {
             return executeGroupUnmark(model);
@@ -150,6 +153,18 @@ public class UnmarkCommand extends Command {
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_UNMARK_GROUP_SUCCESS, unmarkedCount, tutorialGroup, week));
+    }
+
+    private void validateWeekOrThrow(int week) throws CommandException {
+        if (week < 1 || week > Attendance.MAX_WEEKS) {
+            throw new CommandException(MESSAGE_INVALID_WEEK);
+        }
+    }
+
+    private void assertExactlyOneTargetSelected() {
+        boolean hasIndex = index != null;
+        boolean hasTutorialGroup = tutorialGroup != null;
+        assert hasIndex ^ hasTutorialGroup : "Exactly one of index or tutorialGroup must be set.";
     }
 
     @Override
