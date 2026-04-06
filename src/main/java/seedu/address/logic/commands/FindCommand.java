@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names match the given "
             + "name prefixes (case-insensitive), and/or match tutorial group, email, or Telegram handle filters, "
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: [n/NAME_KEYWORD [MORE_KEYWORDS]...] [t/TUTORIAL_GROUP]... [e/EMAIL]... [th/TELE_HANDLE]...\n"
+            + "Parameters: [n/NAME] [t/TUTORIAL_GROUP]... [e/EMAIL]... [th/TELE_HANDLE]...\n"
             + "At least one of n/, t/, e/, or th/ must be present.\n"
             + "Example: " + COMMAND_WORD + " n/alice t/T01 e/alice@u.nus.edu th/@alice";
 
