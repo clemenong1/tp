@@ -57,6 +57,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This ID already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email is already used by another person.";
+    public static final String MESSAGE_DUPLICATE_PHONE = "This phone number is already used by another person.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -99,6 +100,8 @@ public class EditCommand extends Command {
 
         if (model.hasPersonWithEmail(editedPerson.getEmail(), personToEdit)) {
             throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+        if (model.hasPersonWithPhone(editedPerson.getPhone(), personToEdit)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
         model.setPerson(personToEdit, editedPerson);

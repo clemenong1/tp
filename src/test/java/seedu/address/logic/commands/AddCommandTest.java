@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -151,6 +152,7 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPersonWithEmail(Email email, Person excludePerson) {
+        public boolean hasPersonWithPhone(Phone phone, Person excludePerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -195,6 +197,8 @@ public class AddCommandTest {
         @Override
         public boolean hasPersonWithEmail(Email email, Person excludePerson) {
             return !this.person.equals(excludePerson) && this.person.getEmail().equals(email);
+        public boolean hasPersonWithPhone(Phone phone, Person excludePerson) {
+            return !this.person.equals(excludePerson) && this.person.getPhone().equals(phone);
         }
     }
 
@@ -215,6 +219,10 @@ public class AddCommandTest {
             return personsAdded.stream()
                     .filter(p -> !p.equals(excludePerson))
                     .anyMatch(p -> p.getEmail().equals(email));
+        public boolean hasPersonWithPhone(Phone phone, Person excludePerson) {
+            return personsAdded.stream()
+                    .filter(p -> !p.equals(excludePerson))
+                    .anyMatch(p -> p.getPhone().equals(phone));
         }
 
         @Override
