@@ -296,7 +296,7 @@ If the index is missing or invalid format, CLI-Tacts shows the usage message:
 
 If the index is out of bounds, CLI-Tacts shows an error similar to:
 
-> The person index provided is invalid
+> This person's index provided is invalid.
 
 ### Marking attendance : `mark`
 
@@ -368,7 +368,7 @@ If the command format is invalid or missing required parameters, CLI-Tacts shows
 
 If an index is out of bounds, CLI-Tacts shows an error similar to:
 
-> The person index provided is invalid
+> This person's index provided is invalid.
 
 If a student has already been marked for the specified week:
 
@@ -419,7 +419,7 @@ If the command format is invalid or missing required parameters, CLI-Tacts shows
 
 If an index is out of bounds, CLI-Tacts shows an error similar to:
 
-> The person index provided is invalid
+> This person's index provided is invalid.
 
 If a student has already been unmarked for the specified week:
 
