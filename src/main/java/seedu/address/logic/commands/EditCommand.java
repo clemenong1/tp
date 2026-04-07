@@ -56,6 +56,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This ID already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "This email is already used by another person.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -94,6 +95,10 @@ public class EditCommand extends Command {
         // Student ID collisions are handled by the dedicated check above.
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasPersonWithEmail(editedPerson.getEmail(), personToEdit)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.setPerson(personToEdit, editedPerson);
