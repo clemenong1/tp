@@ -38,12 +38,12 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_UNMARK_GROUP_SUCCESS =
             "Unmarked %1$d person(s) in tutorial group %2$s for week %3$d.";
     public static final String MESSAGE_ALREADY_UNMARKED =
-            "This person has already been unmarked as attended for this week.";
+            "This person is already unmarked for this week.";
     public static final String MESSAGE_GROUP_NOT_FOUND =
-            "No persons found in tutorial group: %1$s.";
+            "No students found in tutorial group: %1$s.";
     public static final String MESSAGE_GROUP_ALREADY_UNMARKED =
             "All persons in tutorial group %1$s are already unmarked for week %2$d.";
-    public static final String MESSAGE_INVALID_WEEK = "Week must be a positive integer between 1 to 13.";
+    public static final String MESSAGE_INVALID_WEEK = "Week must be a positive integer between 1 and 13.";
 
     private final Index index;
     private final TutorialGroup tutorialGroup;

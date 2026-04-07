@@ -47,7 +47,7 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_MARK_MULTIPLE_SUCCESS =
             "Marked week %1$d for %2$d selected student(s): %3$d updated, %4$d already recorded for this week.";
     public static final String MESSAGE_NO_STUDENTS_IN_GROUP = "No students found in tutorial group %1$s.";
-    public static final String MESSAGE_INVALID_WEEK = "Week must be a positive integer between 1 to 13.";
+    public static final String MESSAGE_INVALID_WEEK = "Week must be a positive integer between 1 and 13.";
 
     private final Optional<Index> index;
     private final Optional<List<Index>> indices;
