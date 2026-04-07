@@ -114,7 +114,7 @@ Examples:
 
 ![add command](images/addCommand.png)
 
-If any field value is invalid, CLI-Tacts shows the corresponding constraint message. Examples:
+Here are some examples of error messages if the command entered is invalid:
 
 If any non-optional field (`n/`, `i/`, `e/`, `p/`, `t/`) is missing, CLI-Tacts shows the usage message:
 
@@ -174,10 +174,12 @@ Format:
 
 Examples:
 
-*  `edit 1 p/91234567 e/alice_new@u.nus.edu` Edits the phone number and email address of the 1st student.
+*  `edit 2 p/99272758 e/berniceyu@u.nus.edu` Edits the phone number and email address of the 1st student.
 *  `edit 2 t/T03` Moves the 2nd student to tutorial group `T03`.
 
 ![edit command](images/editCommand.png)
+
+Here are some examples of error messages if the command entered is invalid:
 
 If the index is missing or invalid, CLI-Tacts shows the usage message:
 
@@ -202,7 +204,7 @@ Allows a TA to **filter the student list** to find specific individuals based on
 
 Formats:
 
-* `find n/NAME_KEYWORD [MORE_KEYWORDS]...`
+* `find n/NAME`
 * `find t/TUTORIAL_GROUP`
 * `find e/EMAIL`
 * `find th/TELE_HANDLE`
@@ -215,7 +217,7 @@ At least one of `n/`, `t/`, `e/`, or `th/` must be present.
 * **Words after `n/`**: you can type **one or more words** separated by spaces. Each word is a **prefix** checked against the student’s full name (first name, last name, etc.); **every** word you type must match **some** name part. Letter case does not matter.
 * **With tutorial group**: use `t/` in the same command when you also want to filter by group (e.g. `find n/John t/T01`).
 
-If an invalid name keyword is supplied, CLI-Tacts shows an error similar to:
+If an invalid name is supplied, CLI-Tacts shows an error similar to:
 
 > Invalid name! Search terms should only contain alphanumeric characters, spaces, hyphens (-), commas (,), and apostrophes (') only.
 
@@ -287,6 +289,8 @@ Examples:
 
 ![delete command](images/delete_success.png)
 
+Here are some examples of error messages if the command entered is invalid:
+
 If the index is missing or invalid format, CLI-Tacts shows the usage message:
 
 > Invalid command format!
@@ -300,7 +304,7 @@ If the index is out of bounds, CLI-Tacts shows an error similar to:
 
 ### Marking attendance : `mark`
 
-CLI-Tacts supports three ways to mark attendance for a given **week** (positive integer, typically 1–13):
+CLI-Tacts supports **three ways to mark attendance** for a given week (positive integer, typically 1–13):
 
 #### Mark one student (by index)
 
@@ -355,6 +359,8 @@ Example (whole group):
 
 * `mark t/T02 w/2` — marks all students in tutorial group `T02` for week 2.
 
+Here are some examples of error messages if the command entered is invalid:
+
 If the command format is invalid or missing required parameters, CLI-Tacts shows the usage message:
 
 > Invalid command format!
@@ -384,7 +390,7 @@ If a tutorial group has no students (for group mark):
 
 ### Unmarking attendance : `unmark`
 
-Unmarks a student's attendance for a specific week during a tutorial session. CLI-Tacts supports two ways to unmark attendance:
+Unmarks a student's attendance for a specific week during a tutorial session. CLI-Tacts supports **two ways to unmark attendance**:
 
 #### Unmark one student (by index)
 
@@ -408,6 +414,8 @@ Where:
 Examples:
 * `unmark 1 w/2` — unmarks the 1st student in the displayed list for week 2.
 * `unmark t/T01 w/4` — unmarks attendance for all marked students in tutorial group T01 for week 4.
+
+Here are some examples of error messages if the command entered is invalid:
 
 If the command format is invalid or missing required parameters, CLI-Tacts shows the usage message:
 
@@ -550,7 +558,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [i/STUDENT_ID] [e/EMAIL] [p/PHONE_NUMBER] [th/TELE_HANDLE] [t/TUTORIAL_GROUP]`<br> e.g.,`edit 2 n/James Lee t/T03`
 **Export** | `export`
-**Find** | `find [n/NAME_KEYWORD [MORE_KEYWORDS]...] [t/TUTORIAL_GROUP] [e/EMAIL] [th/TELE_HANDLE]`<br> e.g., `find n/James t/T01 e/james@u.nus.edu`
+**Find** | `find [n/NAME [t/TUTORIAL_GROUP] [e/EMAIL] [th/TELE_HANDLE]`<br> e.g., `find n/James t/T01 e/james@u.nus.edu`
 **List** | `list`
 **Mark** | `mark INDEX w/WEEK`<br> `mark INDEX1 INDEX2 ... w/WEEK`<br> `mark t/TUTORIAL_GROUP w/WEEK`<br> e.g., `mark 1 w/2` or `mark 1 2 3 w/5` or `mark t/T02 w/2`
 **Unmark** | `unmark INDEX w/WEEK`<br> e.g., `unmark 1 w/2` or `unmark t/T01 w/2`
