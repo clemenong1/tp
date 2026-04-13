@@ -188,4 +188,11 @@ public class ParserUtilTest {
         TutorialGroup expectedTutorialGroup = new TutorialGroup(VALID_TUTORIAL_GROUP);
         assertEquals(expectedTutorialGroup, ParserUtil.parseTutorialGroup(tutorialGroupWithWhitespace));
     }
+
+    @Test
+    public void parseTutorialGroup_mixedCase_normalizesToUppercase() throws Exception {
+        TutorialGroup expected = new TutorialGroup("T01");
+        assertEquals(expected, ParserUtil.parseTutorialGroup("t01"));
+        assertEquals(expected, ParserUtil.parseTutorialGroup("T01"));
+    }
 }

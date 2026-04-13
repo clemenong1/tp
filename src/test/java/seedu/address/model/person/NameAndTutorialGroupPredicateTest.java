@@ -53,6 +53,15 @@ public class NameAndTutorialGroupPredicateTest {
     }
 
     @Test
+    public void test_tutorialGroup_matchesCaseInsensitiveInput() {
+        Person person = new PersonBuilder().withName("Alice Pauline").withTutorialGroup("t01").build();
+        NameAndTutorialGroupPredicate predicate =
+                new NameAndTutorialGroupPredicate(List.of(), List.of(new TutorialGroup("T01")), List.of(), List.of());
+
+        assertTrue(predicate.test(person));
+    }
+
+    @Test
     public void test_bothNameAndTutorialGroup_mustMatchBoth() {
         Person person = new PersonBuilder().withName("Alice Pauline").withTutorialGroup("T01").build();
         NameAndTutorialGroupPredicate predicate =

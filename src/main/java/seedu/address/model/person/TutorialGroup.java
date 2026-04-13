@@ -3,34 +3,42 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Locale;
+
 /**
  * Represents a Person's tutorial group in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTutorialGroup(String)}.
+ * Input may use any letter casing; the stored {@link #value} is always uppercase (canonical form).
  */
 public class TutorialGroup {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tutorial group should start with 'T' followed by exactly 2 digits (e.g. T01, T12).";
-    public static final String VALIDATION_REGEX = "^T\\d{2}$";
+            "Tutorial group should be 3 to 5 alphanumeric characters (letters or digits) inclusive. "
+            + "Letters are case-insensitive; stored in uppercase.";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9]{3,5}$";
 
     public final String value;
 
     /**
      * Constructs a {@code TutorialGroup}.
+     * Leading and trailing spaces are trimmed; letters are uppercased.
      *
-     * @param tutorialGroup A valid tutorial group.
+     * @param tutorialGroup A valid tutorial group in any letter casing.
      */
     public TutorialGroup(String tutorialGroup) {
         requireNonNull(tutorialGroup);
         checkArgument(isValidTutorialGroup(tutorialGroup), MESSAGE_CONSTRAINTS);
-        value = tutorialGroup;
+        value = tutorialGroup.trim().toUpperCase(Locale.ROOT);
     }
 
     /**
-     * Returns true if a given string is a valid tutorial group.
+     * Returns true if {@code test} is non-null and trims to a valid tutorial group.
      */
     public static boolean isValidTutorialGroup(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test == null) {
+            return false;
+        }
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
     @Override

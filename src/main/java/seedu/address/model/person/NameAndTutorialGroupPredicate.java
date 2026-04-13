@@ -8,7 +8,8 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches all given name prefixes (each as a word-prefix,
- * case-insensitive), and/or {@code TutorialGroup}, email, or Telegram handle match the filters.
+ * case-insensitive), and/or {@code TutorialGroup} (normalized to uppercase when parsed, same as stored persons),
+ * email, or Telegram handle match the filters.
  */
 public class NameAndTutorialGroupPredicate implements Predicate<Person> {
     private final List<String> nameKeywords;
@@ -43,7 +44,7 @@ public class NameAndTutorialGroupPredicate implements Predicate<Person> {
         boolean matchesName = nameKeywords.isEmpty() || nameKeywords.stream()
                 .allMatch(keyword -> StringUtil.containsWordPrefixIgnoreCase(person.getName().fullName, keyword));
         boolean matchesTutorialGroup = tutorialGroups.isEmpty() || tutorialGroups.stream()
-                .anyMatch(group -> person.getTutorialGroup().value.equalsIgnoreCase(group.value));
+                .anyMatch(group -> person.getTutorialGroup().equals(group));
         boolean matchesEmail = emailPrefixes.isEmpty() || emailPrefixes.stream()
                 .anyMatch(prefix -> StringUtil.startsWithIgnoreCase(person.getEmail().value, prefix));
         boolean matchesTeleHandle = teleHandlePrefixes.isEmpty() || teleHandlePrefixes.stream()
