@@ -132,7 +132,7 @@ class JsonAdaptedPerson {
         Attendance modelAttendance = new Attendance();
         if (!attendance.isEmpty()) {
             for (int i = 0; i < attendance.size() && i < Attendance.MAX_WEEKS; i++) {
-                if (attendance.get(i)) {
+                if (Boolean.TRUE.equals(attendance.get(i))) {
                     modelAttendance.markWeek(i + 1);
                 }
             }
