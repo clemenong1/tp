@@ -11,7 +11,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TeleHandle {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram handle should start with '@' and be 5 to 32 characters long (letters, numbers, underscores).";
+            "Telegram handle should start with '@' followed by 5 to 32 characters (letters, numbers, underscores).";
 
     // Telegram usernames are 5-32 chars, letters/digits/underscore. We store with leading '@'.
     public static final String VALIDATION_REGEX = "^@[A-Za-z0-9_]{5,32}$";

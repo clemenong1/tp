@@ -157,7 +157,7 @@ If an invalid phone number is supplied:
 If an invalid Telegram handle is supplied:
 
 <div style="border: 1px solid #d9d9d9; border-radius: 6px; padding: 8px 12px; margin: 8px 0;">
-<code>Telegram handle should start with '@' and be 5 to 32 characters long (letters, numbers, underscores).</code>
+<code>Telegram handle should start with '@' followed by 5 to 32 characters (letters, numbers, underscores).</code>
 </div>
 
 If an invalid tutorial group is supplied:
