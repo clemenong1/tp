@@ -7,7 +7,6 @@ CLI-Tacts is a lightweight application to manage your CS2040S students! It is op
 usage (CLI)**, while having the benefits of a **Graphical User Interface (GUI)**. The best of both worlds, quickness of a CLI and visualisation of a GUI! For fast typers, CLI-Tacts helps you optimise your workflow better than traditional GUI-only grading portals.
 
 The primary users are **CS2040S Teaching Assistants** who:
-
 - manage multiple tutorial or lab groups concurrently
 - need to **take attendance quickly** and look up student details on the spot
 - prefer keyboard-driven workflows during lab sessions
@@ -186,7 +185,7 @@ If a student with the same phone number already exists:
 </div>
 ### Listing all students : `list`
 
-Shows a list of all students currently in CLI-Tacts.
+Shows a list of all students currently in CLI-Tacts in the order they were added.
 
 Format: `list`
 
@@ -253,7 +252,7 @@ If any field value is invalid, CLI-Tacts shows the corresponding constraint mess
 
 ### Locating students by name, tutorial group, email, or telegram handle: `find`
 
-Allows a TA to **filter the student list** to find specific individuals based on their name, tutorial group, NUS email, or Telegram handle. This is useful when the matric number (student ID) is not immediately known.
+Allows a TA to **filter the student list** to find specific individuals based on their name, tutorial group, NUS email, or Telegram handle. This is useful when the matric number (student ID) is not immediately known. The filtered results are displayed in **insertion order** (the order students were added to the application).
 
 Formats:
 
@@ -341,11 +340,12 @@ Examples:
 
 ### Listing all students : `list`
 
-Lists all students in the address book.
+Lists all students in the address book in the order they were added.
 
 Format: `list`
 
 * Shows all students in the address book with their index numbers, names, student IDs, emails, phone numbers, Telegram handles (if present), and tutorial groups.
+* Students are displayed in **insertion order** (the order they were added to the application), not alphabetically.
 * The attendance statistics panel at the bottom updates to show statistics for all students.
 
 Examples:

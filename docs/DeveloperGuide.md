@@ -221,7 +221,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | CS2040S Teaching Assistant | unmark every student in a tutorial group for a week in one command | correct bulk attendance mistakes without repeating single-student unmarks |
 | `* *` | CS2040S Teaching Assistant | navigate through command history using arrow keys | repeat or modify previous commands quickly without retyping |
 | `* *` | CS2040S Teaching Assistant | view an attendance statistics panel by tutorial group | monitor attendance rates at a glance |
-| `* *` | CS2040S Teaching Assistant | export student and attendance records to a CSV | back up data or submit attendance reports |
+| `* *` | CS2040S Teaching Assistant | export student and attendance records as a CSV file | back up data or submit attendance reports |
 | `*` | CS2040S Teaching Assistant | clear all entries from the application | reset the app cleanly for a new semester |
 
 ### Use cases
@@ -451,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to find students using one or more filters (e.g., `find n\john`, `find t\T01`, `find e\alice@`, `find th\@bot`).
 2. CLI-Tacts parses the command and validates filter formats.
 3. CLI-Tacts updates the displayed list to show only students matching all specified filter criteria.
-4. CLI-Tacts displays the filtered list with student details and index numbers.
+4. CLI-Tacts displays the filtered list with student details and index numbers in **insertion order** (the order students were added to the application).
 
    Use case ends.
 
@@ -478,7 +478,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list all students (e.g., `list`).
 2. CLI-Tacts displays the complete student list with index numbers, names, student IDs, emails, phone numbers, Telegram handles (if present), and tutorial groups.
-3. The list is shown in the main display area.
+3. The list is displayed in **insertion order** (the order students were added to the application).
+4. The list is shown in the main display area.
 
    Use case ends.
 
@@ -511,7 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to export all student data to CSV (e.g., `export`).
+1. User requests to export all student data as a CSV file (e.g., `export`).
 2. CLI-Tacts validates the command.
 3. CLI-Tacts collects all student data (name, ID, email, tutorial group, attendance for weeks 1-13).
 4. CLI-Tacts creates a file named `export.csv` in the application's directory.
