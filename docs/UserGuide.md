@@ -174,17 +174,17 @@ If a student with the same student ID already exists:
 If a student with the same email already exists:
 
 <div style="border: 1px solid #d9d9d9; border-radius: 6px; padding: 8px 12px; margin: 8px 0;">
-<code>This email is already used by another person.</code>
+<code>This email is already used by another student.</code>
 </div>
 
 If a student with the same phone number already exists:
 
 <div style="border: 1px solid #d9d9d9; border-radius: 6px; padding: 8px 12px; margin: 8px 0;">
-<code>This phone number is already used by another person.</code>
+<code>This phone number is already used by another student.</code>
 </div>
 
 </div>
-### Listing all persons : `list`
+### Listing all students : `list`
 
 Shows a list of all students currently in CLI-Tacts.
 
@@ -325,8 +325,8 @@ Example after applying `find th/@ro`:
   - Example: `find n/john n/ann` matches students with "john" **OR** "ann" in their name.
 * **Different field types (e.g., `n/` and `t/`)**: AND logic — a student matches only if they match **all** specified categories.
   - Example: `find n/john t/T01` matches students with "john" in their name **AND** in tutorial group T01.
-* On success, the status bar shows e.g. `5 persons listed!` and the list shows only matching students.
-* If no students match, the list becomes empty and the status shows `0 persons listed!`.
+* On success, the status bar shows e.g. `5 students listed!` and the list shows only matching students.
+* If no students match, the list becomes empty and the status shows `0 students listed!`.
 
 Examples:
 * `find n/j` — finds students whose name has a part starting with `j`.
@@ -454,7 +454,7 @@ If the command format is invalid or missing required parameters, CLI-Tacts shows
 
 <div style="border: 1px solid #d9d9d9; border-radius: 6px; padding: 8px 12px; margin: 8px 0;">
 <code>Invalid command format!<br>
-mark: Marks attendance for one or more persons by list index, or for everyone in a tutorial group.<br>
+mark: Marks attendance for one or more students by list index, or for everyone in a tutorial group.<br>
 Parameters (single): INDEX (positive integer) w/WEEK (positive integer)<br>
 Parameters (multiple): INDEX1 INDEX2 ... (positive integers) w/WEEK (positive integer)<br>
 Parameters (group): t/TUTORIAL_GROUP w/WEEK (positive integer)<br>
@@ -553,13 +553,13 @@ If the week is not in the range 1–13:
 If a tutorial group has no students (for group unmark):
 
 <div style="border: 1px solid #d9d9d9; border-radius: 6px; padding: 8px 12px; margin: 8px 0;">
-<code>No persons found in tutorial group: X.</code>
+<code>No students found in tutorial group: X.</code>
 </div>
 
 If all students in the tutorial group are already unmarked for that week:
 
 <div style="border: 1px solid #d9d9d9; border-radius: 6px; padding: 8px 12px; margin: 8px 0;">
-<code>All persons in tutorial group X are already unmarked for week Y.</code>
+<code>All students in tutorial group X are already unmarked for week Y.</code>
 </div>
 
 </div>
