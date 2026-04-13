@@ -158,7 +158,7 @@ Feature behaviour (**add**, **delete**, **edit**, **find**, **mark**, **unmark**
 
 ### Find command
 
-The `find` command is parsed by [`FindCommandParser`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/logic/parser/FindCommandParser.java). It builds a [`NameAndTutorialGroupPredicate`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/model/person/NameAndTutorialGroupPredicate.java) (and [`FindCommand`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/logic/commands/FindCommand.java) updates the model’s filtered person list).
+The `find` command is parsed by [`FindCommandParser`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/logic/parser/FindCommandParser.java). It builds a [`NameAndTutorialGroupPredicate`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/model/person/NameAndTutorialGroupPredicate.java) (and [`FindCommand`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/logic/commands/FindCommand.java) updates the model’s filtered student list).
 
 **Name (`n\`)**
 
@@ -281,7 +281,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 3a. A student with the same student ID already exists.
-    * 3a1. CLI-Tacts shows an error message: "This ID already exists in the address book".
+    * 3a1. CLI-Tacts shows an error message: "This student ID is already used by another student.".
 
       Use case ends.
 
@@ -654,7 +654,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * Command: A text instruction typed by the user into the command box to perform an action (e.g., add, delete, find, mark, unmark).
 
-* Command prefix: A token that identifies the value of a field in a command (e.g., n\ for name, i\ for student id, e\ for email, t\ for tutorial group).
+* Command prefix: A token that identifies the value of a field in a command (e.g., n\ for name, i\ for student ID, e\ for email, t\ for tutorial group).
 
 * Command result: The message returned by the system after executing a command, indicating success or failure.
 
@@ -684,7 +684,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * Structured format: A machine-readable data format with defined fields and structure, such as JSON.
 
-* Student id: The unique identifier for a student (e.g., A0123456X) used as the primary key for identifying a student in the application.
+* Student ID: The unique identifier for a student (e.g., A0123456X) used as the primary key for identifying a student in the application.
 
 * Telegram: A cloud-based instant messaging application. In CLI-Tacts, students can have an optional Telegram handle (@-prefixed username, 5–32 characters) for contact purposes.
 

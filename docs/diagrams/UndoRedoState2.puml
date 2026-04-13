@@ -4,7 +4,7 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "add n/David"
+title After command "add n\David Li i\A0123456X e\david@u.nus.edu p\98765432 t\T01"
 
 package States <<rectangle>> {
     class State1 as "<u>ab0:AddressBook</u>"

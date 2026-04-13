@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_TUTORIAL_GROUP + "T01";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This ID already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student ID is already used by another student.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email is already used by another student.";
     public static final String MESSAGE_DUPLICATE_PHONE = "This phone number is already used by another student.";
     public static final String MESSAGE_DUPLICATE_TELE_HANDLE =

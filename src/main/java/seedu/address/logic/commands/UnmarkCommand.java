@@ -38,7 +38,7 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_UNMARK_GROUP_SUCCESS =
             "Unmarked %1$d student(s) in tutorial group %2$s for week %3$d.";
     public static final String MESSAGE_ALREADY_UNMARKED =
-            "This student is already unmarked for this week.*";
+            "This student is already unmarked for this week.";
     public static final String MESSAGE_GROUP_NOT_FOUND =
             "No students found in tutorial group: %1$s.";
     public static final String MESSAGE_GROUP_ALREADY_UNMARKED =
