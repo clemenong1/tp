@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -16,6 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -58,7 +58,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = Messages.getPersonsListedOverview(0);
         NameAndTutorialGroupPredicate predicate = new NameAndTutorialGroupPredicate(List.of(), List.of(), List.of(),
                 List.of());
         FindCommand command = new FindCommand(predicate);
@@ -69,7 +69,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_nameWords_allMatch() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = Messages.getPersonsListedOverview(1);
         NameAndTutorialGroupPredicate predicate =
                 new NameAndTutorialGroupPredicate(List.of("Daniel"), List.of(), List.of(),
                         List.of());
@@ -81,7 +81,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_tutorialGroupOnly_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = Messages.getPersonsListedOverview(2);
         NameAndTutorialGroupPredicate predicate =
                 new NameAndTutorialGroupPredicate(List.of(), List.of(new TutorialGroup("T01")), List.of(), List.of());
         FindCommand command = new FindCommand(predicate);
@@ -92,7 +92,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_nameKeywordsAndTutorialGroup_bothApply() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = Messages.getPersonsListedOverview(1);
         NameAndTutorialGroupPredicate predicate = new NameAndTutorialGroupPredicate(
                 Arrays.asList("Alice", "Pau"), List.of(new TutorialGroup("T01")), List.of(), List.of());
         FindCommand command = new FindCommand(predicate);
@@ -103,7 +103,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_nameKeywordsAndTutorialGroup_noMatchWhenWrongGroup() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = Messages.getPersonsListedOverview(0);
         NameAndTutorialGroupPredicate predicate = new NameAndTutorialGroupPredicate(
                 List.of("Alice"), List.of(new TutorialGroup("T02")), List.of(), List.of());
         FindCommand command = new FindCommand(predicate);
@@ -114,7 +114,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleNameKeywords_anyKeywordMatches() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = Messages.getPersonsListedOverview(1);
         NameAndTutorialGroupPredicate predicate = new NameAndTutorialGroupPredicate(
                 List.of("Daniel", "Me"), List.of(), List.of(), List.of());
         FindCommand command = new FindCommand(predicate);
@@ -134,7 +134,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_emailOnly_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = Messages.getPersonsListedOverview(1);
         NameAndTutorialGroupPredicate predicate = new NameAndTutorialGroupPredicate(List.of(), List.of(),
                 List.of("alice@u.nus.edu"), List.of());
         FindCommand command = new FindCommand(predicate);
@@ -145,7 +145,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_teleHandleOnly_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = Messages.getPersonsListedOverview(1);
         NameAndTutorialGroupPredicate predicate = new NameAndTutorialGroupPredicate(List.of(), List.of(), List.of(),
                 List.of("@benson_meier"));
         FindCommand command = new FindCommand(predicate);

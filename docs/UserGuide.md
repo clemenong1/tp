@@ -7,12 +7,10 @@ CLI-Tacts is a lightweight application to manage your CS2040S students! It is op
 usage (CLI)**, while having the benefits of a **Graphical User Interface (GUI)**. The best of both worlds, quickness of a CLI and visualisation of a GUI! For fast typers, CLI-Tacts helps you optimise your workflow better than traditional GUI-only grading portals.
 
 The primary users are **CS2040S Teaching Assistants** who:
-* manage multiple tutorial or lab groups concurrently
-* need to **take attendance quickly** and look up student details on the spot
-* prefer keyboard-driven workflows during lab sessions
 
-
-
+- manage multiple tutorial or lab groups concurrently
+- need to **take attendance quickly** and look up student details on the spot
+- prefer keyboard-driven workflows during lab sessions
 
 * Table of Contents
 {:toc}
@@ -54,6 +52,8 @@ The primary users are **CS2040S Teaching Assistants** who:
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+At all times, the displayed student list follows the order in which each student was added (add order).
 
 <div markdown="block" class="alert alert-info">
 
@@ -98,6 +98,8 @@ Adds a student to CLI-Tacts. Telegram handle is optional (useful for contacting 
 ```
 add n\NAME i\STUDENT_ID e\EMAIL p\PHONE [th\TELE_HANDLE] t\TUTORIAL_GROUP
 ```
+
+Only one occurrence of each command prefix (`n\`, `i\`, `e\`, `p\`, `th\`, `t\`) should be provided in a single command.
 
 #### Parameters
 
@@ -273,6 +275,8 @@ Example: edit 1 n\John Doe i\A0123456X e\johndoe@u.nus.edu p\91234567 th\@john_d
 ### Locating students by name, tutorial group, email, or telegram handle: `find`
 
 Allows a TA to **filter the student list** to find specific individuals based on their name, tutorial group, NUS email, or Telegram handle. This is useful when the matric number (student ID) is not immediately known. The filtered results are displayed in **insertion order** (the order students were added to the application).
+
+After performing commands that change student data or attendance (e.g. `add`, `edit`, `mark`, `unmark`), any active `find` filter is cleared and the list shows **all** students again, `delete` is an exception (run `list` or `find` again if you need to reset or change the filtered view).
 
 #### Formats
 
@@ -491,9 +495,11 @@ CLI-Tacts supports **two ways to unmark attendance** for a given week (positive 
 * `unmark INDEX w\WEEK`
 * `unmark t\TUTORIAL_GROUP w\WEEK`
 
+You cannot unmark multiple indices similar to mark, because unmark is likely for correcting mistakes **one** student at a time. To unmark many students, use the tutorial-group format below.
+
 #### Parameters
 
-* **INDEX** — Position in the **currently displayed** student list (`list`, `find`, etc.). Must be a positive integer.
+* **INDEX** — Position in the **currently displayed** student list (`list`, `find`, etc.). Must be a positive integer. Only **one** index per command; multiple indices are not supported.
 * **TUTORIAL_GROUP** — 3–5 alphanumeric characters (e.g., `T01`, `Lab2`). Letter casing is ignored; values match the **uppercase** form stored for each student.
 * **WEEK** — The week number to unmark attendance for. Must be a positive integer between 1–13.
 
@@ -501,7 +507,6 @@ CLI-Tacts supports **two ways to unmark attendance** for a given week (positive 
 
 * **Single student** (by index):
   * `unmark 1 w\2` — unmarks the 1st student in the displayed list for week 2.
-  * `unmark w\2 1` — same as above, with prefix order reversed.
 
 * **Tutorial group** (all students):
   * `unmark t\T01 w\4` — unmarks attendance for all marked students in tutorial group T01 for week 4.
@@ -600,6 +605,7 @@ The file contains one header row followed by one row per student:
 #### Notes
 
 - The export always includes **all** students in the address book, regardless of any active `find` filter.
+- **Phone number** and **Telegram handle** are stored in CLI-Tacts but are **not** written to the CSV—they are not needed when submitting attendance records.
 - If `export.csv` already exists in the folder, it will be **overwritten**.
 - All string fields are wrapped in double quotes in the CSV output.
 
