@@ -32,18 +32,3 @@ h2, h3, h4, h5, h6 {
   }
 }
 
-// Class diagrams: scale to the article column so the full image is visible without horizontal scrolling
-.diagram-scroll {
-  display: block;
-  width: 100%;
-  margin: 1.5rem 0;
-  max-width: 100%;
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 100% !important;
-  }
-}
-
