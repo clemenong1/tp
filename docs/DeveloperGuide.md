@@ -29,7 +29,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img class="diagram-wide" src="images/ArchitectureDiagram.png" alt="Architecture diagram of CLI-Tacts" />
+<div class="diagram-scroll">
+  <img src="images/ArchitectureDiagram.png" alt="Architecture diagram of CLI-Tacts" />
+</div>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -54,7 +56,9 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img class="diagram-wide" src="images/ArchitectureSequenceDiagram.png" alt="Sequence diagram for delete command" />
+<div class="diagram-scroll">
+  <img src="images/ArchitectureSequenceDiagram.png" alt="Sequence diagram for delete command" />
+</div>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -63,7 +67,9 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent other components from being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img class="diagram-wide" src="images/ComponentManagers.png" alt="Component Manager classes" />
+<div class="diagram-scroll">
+  <img src="images/ComponentManagers.png" alt="Component Manager classes" />
+</div>
 
 The sections below give more details of each component.
 
@@ -71,7 +77,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<img class="diagram-wide" src="images/UiClassDiagram.png" alt="Structure of the UI Component" />
+<div class="diagram-scroll">
+  <img src="images/UiClassDiagram.png" alt="Structure of the UI Component" />
+</div>
 
 The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -90,12 +98,13 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img class="diagram-wide" src="images/LogicClassDiagram.png" alt="Partial class diagram of the Logic component" />
+<div class="diagram-scroll">
+  <img src="images/LogicClassDiagram.png" alt="Partial class diagram of the Logic component" />
+</div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-{: .diagram-wide}
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -110,7 +119,9 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img class="diagram-wide" src="images/ParserClasses.png" alt="Parser classes in the Logic component" />
+<div class="diagram-scroll">
+  <img src="images/ParserClasses.png" alt="Parser classes in the Logic component" />
+</div>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -119,7 +130,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img class="diagram-wide" src="images/ModelClassDiagram.png" alt="Class diagram of the Model component" />
+<div class="diagram-scroll">
+  <img src="images/ModelClassDiagram.png" alt="Class diagram of the Model component" />
+</div>
 
 
 The `Model` component,
@@ -138,7 +151,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2526S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img class="diagram-wide" src="images/StorageClassDiagram.png" alt="Class diagram of the Storage component" />
+<div class="diagram-scroll">
+  <img src="images/StorageClassDiagram.png" alt="Class diagram of the Storage component" />
+</div>
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
