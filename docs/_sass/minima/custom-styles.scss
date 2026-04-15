@@ -2,6 +2,9 @@
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
 h2, h3, h4, h5, h6 {
   color: #e46c0a;
+  // Keep headings with the start of the following content when printing / exporting to PDF
+  break-after: avoid;
+  page-break-after: avoid;
 }
 
 // Keep caption/example text with the following screenshot when printing or exporting to PDF

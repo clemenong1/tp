@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+<div class="keep-together" markdown="1">
+
 CLI-Tacts is a lightweight application to manage your CS2040S students! It is optimised for **Command Line Interface 
 usage (CLI)**, while having the benefits of a **Graphical User Interface (GUI)**. The best of both worlds, quickness of a CLI and visualisation of a GUI! For fast typers, CLI-Tacts helps you optimise your workflow better than traditional GUI-only grading portals.
 
@@ -12,12 +14,18 @@ The primary users are **CS2040S Teaching Assistants** who:
 - need to **take attendance quickly** and look up student details on the spot
 - prefer keyboard-driven workflows during lab sessions
 
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div class="keep-together" markdown="1">
 
 ## Table of Contents
 
 * Table of Contents
 {:toc}
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -32,9 +40,15 @@ The primary users are **CS2040S Teaching Assistants** who:
 
 1. Copy the file to the folder you want to use as the _home folder_ for CLI-Tacts.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar CLI-Tacts.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. If this is your first time using CLI-Tacts (or no existing data file is found), the app starts with sample data so you can try commands immediately.<br>
-   ![Ui](images/Ui.png)
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar CLI-Tacts.jar` command to run the application.
+
+    <div class="keep-together" markdown="1">
+
+    A GUI similar to the below should appear in a few seconds. If this is your first time using CLI-Tacts (or no existing data file is found), the app starts with sample data so you can try commands immediately.
+
+    ![Ui](images/Ui.png)
+
+    </div>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window containing the link to this user guide.<br>
    Some example commands you can try:
@@ -55,9 +69,13 @@ The primary users are **CS2040S Teaching Assistants** who:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div class="keep-together" markdown="1">
+
 ## Features
 
 At all times, the displayed student list follows the order in which each student was added (add order).
+
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -93,17 +111,23 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-</div>
-
 #### Format
 ```
 help
 ```
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 ### Adding a student: `add`
 
 #### Overview
 Adds a student to CLI-Tacts. Telegram handle is optional (useful for contacting students quickly, but not required).
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 #### Format
 ```
@@ -111,6 +135,8 @@ add n\NAME i\STUDENT_ID e\EMAIL p\PHONE [th\TELE_HANDLE] t\TUTORIAL_GROUP
 ```
 
 Only one occurrence of each command prefix (`n\`, `i\`, `e\`, `p\`, `th\`, `t\`) should be provided in a single command.
+
+</div>
 
 #### Parameters
 
@@ -223,15 +249,23 @@ If a student with the same Telegram handle already exists:
 <code>This Telegram handle is already used by another student.</code>
 </div>
 
+<div class="keep-together" markdown="1">
+
 ### Editing a student : `edit`
 
 #### Overview
 Edits an existing student in CLI-Tacts. Field values can be updated while keeping others unchanged.
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 #### Format
 ```
 edit INDEX [n\NAME] [i\STUDENT_ID] [e\EMAIL] [p\PHONE] [th\TELE_HANDLE] [t\TUTORIAL_GROUP]
 ```
+
+</div>
 
 #### Parameters
 
@@ -305,11 +339,17 @@ If any field value is invalid, refer to the [`add` command section](#adding-a-st
 If multiple values are specified for a single-valued field (e.g., `n\John n\Doe`), refer to the corresponding error message in the [`add` command section](#add-possible-error-messages).
 
 
+<div class="keep-together" markdown="1">
+
 ### Locating students by name, tutorial group, email, or telegram handle: `find`
 
 Allows a TA to **filter the student list** to find specific individuals based on their name, tutorial group, NUS email, or Telegram handle. This is useful when the matric number (student ID) is not immediately known. The filtered results are displayed in **insertion order** (the order students were added to the application).
 
 After performing commands that change student data or attendance (e.g. `add`, `edit`, `mark`, `unmark`), any active `find` filter is cleared and the list shows **all** students again, `delete` is an exception (run `list` or `find` again if you need to reset or change the filtered view).
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 #### Formats
 
@@ -321,7 +361,11 @@ After performing commands that change student data or attendance (e.g. `add`, `e
 
 At least one of `n\`, `t\`, `e\`, or `th\` must be present.
 
+</div>
+
 #### Parameters
+
+<div class="keep-together" markdown="1">
 
 ##### Name filter (`n\`)
 
@@ -339,20 +383,18 @@ At least one of `n\`, `t\`, `e\`, or `th\` must be present.
     * `find n\joh do` matches ✓ (the word "John" starts with "joh" and the word "Doe" starts with "do") 
     * `find n\jane` does not match ✗ (no word starts with "jane")
 
-<div class="keep-together" markdown="1">
-
 Example after applying `find n\Ale`:
 
 ![find by name filter](images/findAle.png)
 
 </div>
 
+<div class="keep-together" markdown="1">
+
 ##### Tutorial group filter (`t\`)
 
 * **Input restrictions**: Same format as [`TUTORIAL_GROUP` in `add` / `edit`](#adding-a-student-add) (3–5 alphanumeric characters).
 * **Case-insensitive**: Values are **stored in uppercase**; you may type any letter casing and filtering still matches.
-
-<div class="keep-together" markdown="1">
 
 Example after applying `find t\T02`:
 
@@ -360,12 +402,12 @@ Example after applying `find t\T02`:
 
 </div>
 
+<div class="keep-together" markdown="1">
+
 ##### Email filter (`e\`)
 
 * **Prefix matching**: The value after `e\` is treated as a prefix match on email (case-insensitive).
   — Example: `find e\Cha` can match `charlotte@u.nus.edu`.
-
-<div class="keep-together" markdown="1">
 
 Example after applying `find e\Cha`:
 
@@ -373,13 +415,13 @@ Example after applying `find e\Cha`:
 
 </div>
 
+<div class="keep-together" markdown="1">
+
 ##### Telegram handle filter (`th\`)
 
 * **Prefix matching**: The value after `th\` is treated as a prefix match on Telegram handle (case-insensitive).
 * **Input restrictions**: `@` have to be used as the first character of the handle else no students will be found.
 * **Quick tips**: Using `th\@` will show all the students with Telegram handles, which can be useful for quickly finding students to contact on Telegram.
-
-<div class="keep-together" markdown="1">
 
 Example after applying `find th\@ro`:
 
@@ -387,11 +429,15 @@ Example after applying `find th\@ro`:
 
 </div>
 
+<div class="keep-together" markdown="1">
+
 ##### Combined filters
 
 * You can combine multiple filter types in one command to narrow results further.
   — Example: `find n\john t\T01` finds students named "john" who are also in tutorial group "T01".
 * Utilizes AND logic between different prefixes.
+
+</div>
 
 {: #find-possible-error-messages}
 #### Possible Error Messages
@@ -410,37 +456,65 @@ Example: find n\alice t\T01 e\alice@u.nus.edu th\@alice<br>
 **Invalid inputs**
 If any field value is invalid, refer to the [`add` command section](#adding-a-student-add) for the specific constraint message.
 
+<div class="keep-together" markdown="1">
+
 ### Listing all students : `list`
 
 #### Overview
 Shows all students in CLI-Tacts in the order they were added. The display includes all student details and updates the attendance statistics panel.
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 #### Format
 ```
 list
 ```
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 #### Display Details
 * Shows all students in the address book with their index numbers, names, student IDs, emails, phone numbers, Telegram handles (if present), and tutorial groups.
 * Students are displayed in **insertion order** (the order they were added to the application), not alphabetically.
 * The attendance statistics panel at the bottom updates to show statistics for all students.
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 #### Examples
 * `list` — displays all students.
 
+</div>
+
 ### Deleting a student : `delete`
+
+<div class="keep-together" markdown="1">
 
 #### Overview
 Deletes the specified student from CLI-Tacts.
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 #### Format
 ```
 delete INDEX
 ```
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 #### Parameters
 
 - **INDEX**: The position in the **currently displayed** student list. **Must be a positive integer** (1, 2, 3, …).
+
+</div>
 
 <div class="keep-together" markdown="1">
 
@@ -471,15 +545,23 @@ If the index is outside the valid range:
 <code>The student index provided is invalid.</code>
 </div>
 
+<div class="keep-together" markdown="1">
+
 ### Marking attendance : `mark`
 
 CLI-Tacts supports **three ways to mark attendance** for a given week (positive integer, typically 1–13).
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 #### Formats
 
 * `mark INDEX w\WEEK`
 * `mark INDEX1 INDEX2 ... w\WEEK`
 * `mark t\TUTORIAL_GROUP w\WEEK`
+
+</div>
 
 #### Parameters
 
@@ -544,9 +626,15 @@ Example (group): mark t\ T02 w\ 2</code>
 **Duplicate field prefix**
 If multiple values are specified for a single-valued field (e.g., `w\ 1 w\ 2`), refer to the corresponding error message in the [`add` command section](#add-possible-error-messages).
 
+<div class="keep-together" markdown="1">
+
 ### Unmarking attendance : `unmark`
 
 CLI-Tacts supports **two ways to unmark attendance** for a given week (positive integer, typically 1–13).
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 #### Formats
 
@@ -554,6 +642,8 @@ CLI-Tacts supports **two ways to unmark attendance** for a given week (positive 
 * `unmark t\TUTORIAL_GROUP w\WEEK`
 
 You cannot unmark multiple indices similar to mark, because unmark is likely for correcting mistakes **one** student at a time. To unmark many students, use the tutorial-group format below.
+
+</div>
 
 #### Parameters
 
@@ -614,15 +704,17 @@ Examples: unmark 1 w\2, unmark t\T01 w\2</code>
 Refer to the corresponding error message in the [`add` command section](#add-possible-error-messages).
 
 
-### Attendance Statistics Panel
-
 <div class="keep-together" markdown="1">
+
+### Attendance Statistics Panel
 
 The **Attendance Statistics Panel** is displayed at the bottom of the main window and updates automatically whenever the student list changes (e.g. after a `mark`, `unmark`, `add`, `delete`, or `find` command).
 
 ![attendance statistics panel](images/attendancePanel.png)
 
 </div>
+
+<div class="keep-together" markdown="1">
 
 #### What it shows
 
@@ -633,21 +725,37 @@ The **Attendance Statistics Panel** is displayed at the bottom of the main windo
 | **Rate** | The overall attendance rate for that tutorial group across all 13 weeks combined. |
 | **Overall** (last row) | The attendance rate across **all** students and all weeks present on the student list. Each week column shows the percentage of all students present that week; the Rate column shows the global average. |
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 #### What to expect
 
 - A value of `0%` for a week means no student in that group has been marked present yet — this is the default before any `mark` command is run.
 - The panel reflects the **currently filtered list**. If you use `find` to narrow down to a subset of students, the statistics will update to reflect only those students.
 - The panel scrolls horizontally if the window is too narrow to show all 13 weeks at once.
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 ### Exporting student data : `export`
 
 #### Overview
 Exports all student data to a CSV file named `export.csv` in the same folder as the JAR file.
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 #### Format
 ```
 export
 ```
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 #### CSV File Format
 
@@ -661,12 +769,20 @@ The file contains one header row followed by one row per student:
 | `Tutorial` | Tutorial group (e.g. `T01`) |
 | `Week1` – `Week13` | Attendance for each week: `1` = present, `0` = absent |
 
+</div>
+
+<div class="keep-together" markdown="1">
+
 #### Notes
 
 - The export always includes **all** students in the address book, regardless of any active `find` filter.
 - **Phone number** and **Telegram handle** are stored in CLI-Tacts but are **not** written to the CSV—they are not needed when submitting attendance records.
 - If `export.csv` already exists in the folder, it will be **overwritten**.
 - All string fields are wrapped in double quotes in the CSV output.
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 #### Example Output
 
@@ -676,9 +792,18 @@ Student,StudentID,Email,Tutorial,Week1,Week2,...,Week13
 "Alice Pauline","A0123456A","alice@u.nus.edu","T01",1,0,0,0,0,0,0,0,0,0,0,0,0
 "Benson Meier","A0123456B","johnd@u.nus.edu","T02",0,0,0,0,0,0,0,0,0,0,0,0,0
 ```
+
+</div>
+
+<div class="keep-together" markdown="1">
+
 ### Saving the data
 
 CLI-Tacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+</div>
+
+<div class="keep-together" markdown="1">
 
 ### Editing the data file
 
@@ -690,8 +815,12 @@ If your changes to the data file make its format invalid, CLI-Tacts will discard
 Furthermore, certain edits can cause CLI-Tacts to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+</div>
+
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div class="keep-together" markdown="1">
 
 ## FAQ
 
@@ -703,8 +832,12 @@ Furthermore, certain edits can cause CLI-Tacts to behave in unexpected ways (e.g
 3. **Replace the new data file** with your backup: copy your old **`addressbook.json`** into the new machine’s **`data`** folder, overwriting the file there. If `data` does not exist yet, create it and put `addressbook.json` inside.
 4. Start CLI-Tacts again from the **same folder** as usual so it loads `data/addressbook.json`. You should see your previous students and attendance.
 
+</div>
+
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div class="keep-together" markdown="1">
 
 ## Known issues
 
@@ -712,7 +845,11 @@ Furthermore, certain edits can cause CLI-Tacts to behave in unexpected ways (e.g
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Index values <= 0 or exceeding Integer.MAX_VALUE** (2,147,483,647) will display the command format error instead of a specific index validation error.
 
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div class="keep-together" markdown="1">
 
 ## Command summary
 
@@ -728,3 +865,5 @@ Action | Format, Examples
 **Mark** | `mark INDEX w\WEEK`<br> `mark INDEX1 INDEX2 ... w\WEEK`<br> `mark t\TUTORIAL_GROUP w\WEEK`<br> e.g., `mark 1 w\2` or `mark 1 2 3 w\5` or `mark t\T02 w\2`
 **Unmark** | `unmark INDEX w\WEEK`<br> `unmark t\TUTORIAL_GROUP w\WEEK`<br> e.g., `unmark 1 w\2` or `unmark t\T01 w\2`
 **Help** | `help`
+
+</div>
