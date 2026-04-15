@@ -76,8 +76,7 @@ At all times, the displayed student list follows the order in which each student
 e.g. `edit 1 n/John Doe` is valid, but `edit n/John Doe 1` is not. 
 
 * **Prefixed arguments can be in any order** for `add`, `edit`, `mark`, `unmark` and `find` commands, *after* any required positional argument.<br> 
-e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.<br> 
-For `edit`: `edit 1 n/NAME p/PHONE_NUMBER` and `edit 1 p/PHONE_NUMBER n/NAME` are both valid.
+e.g. `edit 1 n/NAME p/PHONE_NUMBER` and `edit 1 p/PHONE_NUMBER n/NAME` are the same.<br> 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `export` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
