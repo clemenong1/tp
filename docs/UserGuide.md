@@ -84,11 +84,16 @@ e.g. `edit 1 n/NAME p/PHONE_NUMBER` and `edit 1 p/PHONE_NUMBER n/NAME` are the s
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+
+<div class="keep-together" markdown="1">
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
+
+</div>
 
 #### Format
 ```
@@ -124,12 +129,16 @@ Only one occurrence of each command prefix (`n\`, `i\`, `e\`, `p\`, `th\`, `t\`)
   * Valid: `T01`, `t01`, `CS204` ✓
   * Invalid: `ab` (too short), `T01234` (too long), `T-01` ✗
 
+<div class="keep-together" markdown="1">
+
 #### Examples
 
 * `add n\Amy Bee i\A0123456X e\amy@u.nus.edu p\11111111 th\@amy_bee t\T01`
 * `add n\Bob Chan i\A0765432Y e\bobchan@u.nus.edu p\99998888 th\@bobchan t\T02`
 
 ![add command](images/addCommand.png)
+
+</div>
 
 {: #add-possible-error-messages}
 #### Possible Error Messages
@@ -230,12 +239,16 @@ edit INDEX [n\NAME] [i\STUDENT_ID] [e\EMAIL] [p\PHONE] [th\TELE_HANDLE] [t\TUTOR
 - **NAME, STUDENT_ID, EMAIL, PHONE, TELE_HANDLE, TUTORIAL_GROUP**: Optional; use the same format and constraints as in the [`add` command's possible error](#adding-a-student-add). At least one field must be provided.
 - **Behavior**: Existing values will be updated to the input values. Omitted fields remain unchanged.
 
+<div class="keep-together" markdown="1">
+
 #### Examples
 
 * `edit 2 p\99272758 e\berniceyu@u.nus.edu` — Edits the phone number and email address of the 2nd student.
 * `edit 2 t\T03` — Moves the 2nd student to tutorial group T03.
 
 ![edit command](images/editCommand.png)
+
+</div>
 
 {: #edit-possible-error-messages}
 #### Possible Error Messages
@@ -326,27 +339,39 @@ At least one of `n\`, `t\`, `e\`, or `th\` must be present.
     * `find n\joh do` matches ✓ (the word "John" starts with "joh" and the word "Doe" starts with "do") 
     * `find n\jane` does not match ✗ (no word starts with "jane")
 
+<div class="keep-together" markdown="1">
+
 Example after applying `find n\Ale`:
 
 ![find by name filter](images/findAle.png)
+
+</div>
 
 ##### Tutorial group filter (`t\`)
 
 * **Input restrictions**: Same format as [`TUTORIAL_GROUP` in `add` / `edit`](#adding-a-student-add) (3–5 alphanumeric characters).
 * **Case-insensitive**: Values are **stored in uppercase**; you may type any letter casing and filtering still matches.
 
+<div class="keep-together" markdown="1">
+
 Example after applying `find t\T02`:
 
 ![find by tutorial group filter](images/findT02.png)
+
+</div>
 
 ##### Email filter (`e\`)
 
 * **Prefix matching**: The value after `e\` is treated as a prefix match on email (case-insensitive).
   — Example: `find e\Cha` can match `charlotte@u.nus.edu`.
 
+<div class="keep-together" markdown="1">
+
 Example after applying `find e\Cha`:
 
 ![find by email filter](images/findCha.png)
+
+</div>
 
 ##### Telegram handle filter (`th\`)
 
@@ -354,9 +379,13 @@ Example after applying `find e\Cha`:
 * **Input restrictions**: `@` have to be used as the first character of the handle else no students will be found.
 * **Quick tips**: Using `th\@` will show all the students with Telegram handles, which can be useful for quickly finding students to contact on Telegram.
 
+<div class="keep-together" markdown="1">
+
 Example after applying `find th\@ro`:
 
 ![find by telegram handle filter](images/findRo.png)
+
+</div>
 
 ##### Combined filters
 
@@ -413,12 +442,16 @@ delete INDEX
 
 - **INDEX**: The position in the **currently displayed** student list. **Must be a positive integer** (1, 2, 3, …).
 
+<div class="keep-together" markdown="1">
+
 #### Examples
 
 * `list` followed by `delete 2` — Deletes the 2nd student in the address book.
 * `find n\Betsy` followed by `delete 1` — Deletes the 1st student in the results of the `find` command.
 
 ![delete command](images/delete_success.png)
+
+</div>
 
 {: #delete-possible-error-messages}
 #### Possible Error Messages
@@ -583,9 +616,13 @@ Refer to the corresponding error message in the [`add` command section](#add-pos
 
 ### Attendance Statistics Panel
 
+<div class="keep-together" markdown="1">
+
 The **Attendance Statistics Panel** is displayed at the bottom of the main window and updates automatically whenever the student list changes (e.g. after a `mark`, `unmark`, `add`, `delete`, or `find` command).
 
 ![attendance statistics panel](images/attendancePanel.png)
+
+</div>
 
 #### What it shows
 
