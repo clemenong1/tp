@@ -20,7 +20,6 @@ The primary users are **CS2040S Teaching Assistants** who:
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
-{: .no-break-before}
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
