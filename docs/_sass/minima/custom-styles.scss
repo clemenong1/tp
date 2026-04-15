@@ -4,6 +4,12 @@ h2, h3, h4, h5, h6 {
   color: #e46c0a;
 }
 
+// Keep caption/example text with the following screenshot when printing or exporting to PDF
+.keep-together {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
 // Bootstrap style alerts
 .alert {
   position: relative;
